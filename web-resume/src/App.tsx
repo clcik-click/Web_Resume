@@ -13,7 +13,7 @@ function App() {
           <div className="hidden lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:px-12 lg:text-sm/7 lg:whitespace-nowrap lg:[writing-mode:vertical-rl]">
             <div className="text-lg font-semibold text-slate-700 mb-4">▶️ Here</div>
             <NavLink to="/" 
-              className={({ isActive }) => `block py-2 px-4 rounded-md text-slate-600 hover:bg-slate-200 hover:text-slate-900 
+              className={({ isActive }) => `block py-2 px-4 rounded-md text-slate-600 hover:bg-slate-200 hover:text-slate-900
               ${isActive ? 'bg-slate-300 text-slate-900 font-bold' : ''}`}>🏠</NavLink>
             <NavLink to="/about-me" 
               className={({ isActive }) => 
@@ -74,7 +74,6 @@ function App() {
           <Route path="/about-me" element={<AboutMe />} />
           <Route path="/projects" element={<Projects />} />
         </Routes>
-
       </BrowserRouter>
     </>
   )
