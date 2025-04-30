@@ -4,9 +4,13 @@ function Projects() {
       <main className="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120"> 
         <div className="h-full overflow-y-auto p-6 bg-gray-100 rounded-lg shadow-lg space-y-6">
           <h1 className="text-2xl font-bold mb-4 text-center">📒 Projects</h1>
+        </div>
+        
+        <div className="p-6">
           <p className="text-gray-700">
-          Integer accumsan urna semper, viverra ex vitae, maximus lacus. Aliquam id luctus elit, vel lobortis odio. Sed cursus aliquet velit, ut elementum ipsum pharetra a. Nunc id sapien nibh. Ut mattis nulla nulla. Suspendisse ullamcorper, arcu vestibulum accumsan volutpat, libero mauris viverra elit, ultrices scelerisque magna tellus sed sapien. Nunc blandit magna vitae tellus tristique feugiat. Aenean tincidunt iaculis tincidunt. Quisque venenatis blandit sagittis. Morbi at ligula eu purus lobortis sollicitudin. Nulla nec ipsum sit amet sapien lobortis venenatis. Maecenas consequat dui at cursus suscipit. Aenean dapibus dapibus pretium.
+            Integer accumsan urna semper, viverra ex vitae, maximus lacus. Aliquam id luctus elit, vel lobortis odio. Sed cursus aliquet velit, ut elementum ipsum pharetra a. Nunc id sapien nibh. Ut mattis nulla nulla. Suspendisse ullamcorper, arcu vestibulum accumsan volutpat, libero mauris viverra elit, ultrices scelerisque magna tellus sed sapien. Nunc blandit magna vitae tellus tristique feugiat. Aenean tincidunt iaculis tincidunt. Quisque venenatis blandit sagittis. Morbi at ligula eu purus lobortis sollicitudin. Nulla nec ipsum sit amet sapien lobortis venenatis. Maecenas consequat dui at cursus suscipit. Aenean dapibus dapibus pretium.
           </p>
+          <br />
           <ul className="space-y-4">
             <li className="p-4 bg-white rounded-lg shadow-md">
               <h2 className="text-lg font-semibold">Project #1</h2>
@@ -30,6 +34,7 @@ function Projects() {
             </li>
           </ul>
         </div>
+
       </main>
     </>
   );
