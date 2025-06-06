@@ -7,7 +7,7 @@ const LetsGoText = () => {
         <span
           key={i}
           className="char"
-          style={{ animationDelay: `${i * 0.08}s` }}
+          style={{ animationDelay: `${i * 0.1}s` }}
         >
           {char === " " ? "\u00A0" : char}
         </span>

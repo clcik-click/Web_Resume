@@ -1,14 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface ImageCarouselProps {
   images: string[];
+  onFullscreenChange?: (isOpen: boolean) => void;
 }
 
-const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
+const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onFullscreenChange }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [highlightIndex, setHighlightIndex] = useState(0);
+  const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const [playing, setPlaying] = useState(true); // NEW
 
-  const close = () => setSelectedIndex(null);
+  // Auto-rotate highlight
+  useEffect(() => {
+    if (!playing) return;
+
+    const interval = setInterval(() => {
+      setHighlightIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [playing, images.length]); // Include playing in deps
+
+  const togglePlaying = () => setPlaying((prev) => !prev);
+
+  // Scroll highlighted thumbnail into view
+  useEffect(() => {
+    const current = imageRefs.current[highlightIndex];
+    if (current) {
+      current.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [highlightIndex]);
+
+  useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (selectedIndex === null) return;
+
+    if (e.key === "ArrowLeft") prev();
+    if (e.key === "ArrowRight") next();
+    if (e.key === "Escape") close();
+  };
+
+  window.addEventListener("keydown", handleKeyDown);
+  return () => window.removeEventListener("keydown", handleKeyDown);
+}, [selectedIndex]);
+
+useEffect(() => {
+  imageRefs.current = [];
+}, [images]);
+
+
+  const openImage = (i: number) => {
+    setSelectedIndex(i);
+    onFullscreenChange?.(true);
+  };
+
+  const close = () => {
+    setSelectedIndex(null);
+    onFullscreenChange?.(false);
+  };
   const prev = () =>
     setSelectedIndex((prev) =>
       prev !== null ? (prev - 1 + images.length) % images.length : null
@@ -23,14 +78,31 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
       {/* Thumbnail Row */}
       <div className="flex gap-2 overflow-x-auto p-2">
         {images.map((src, i) => (
-          <img
-            key={i}
-            src={src}
-            onClick={() => setSelectedIndex(i)}
-            className="w-[90px] h-[160px] object-cover rounded cursor-pointer hover:opacity-80 transition"
-            alt={`thumb-${i}`}
-          />
+<img
+  key={i}
+  src={src}
+  ref={(el) => (imageRefs.current[i] = el)}
+  onClick={() => openImage(i)}
+  onKeyDown={(e) => e.key === "Enter" && setSelectedIndex(i)}
+  role="button"
+  tabIndex={0}
+  alt={`thumb-${i}`}
+  className={`h-[160px] rounded cursor-pointer object-cover transition-all duration-300 ${
+    highlightIndex === i
+      ? "w-[270px] ring-4 ring-pink-500 scale-105"
+      : "w-[90px] opacity-80"
+  }`}
+/>
         ))}
+      </div>
+
+      <div className="flex justify-end px-4 py-2">
+        <button
+          onClick={togglePlaying}
+          className="px-4 py-1 bg-pink-500 text-white rounded hover:bg-pink-600 transition"
+        >
+          {playing ? "Pause" : "Start"}
+        </button>
       </div>
 
       {/* Fullscreen Viewer */}
@@ -56,7 +128,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
               alt={`full-${selectedIndex}`}
               className="w-auto h-auto max-h-[80vh] max-w-[80vw] rounded shadow-lg"
             />
-
           </div>
 
           <button
