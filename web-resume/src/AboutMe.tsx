@@ -3,7 +3,7 @@ function AboutMe() {
     <>
       <main className="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120">
         <div className="h-full overflow-y-auto p-6 bg-gray-100 rounded-lg shadow-lg space-y-6">
-          <h1 className="text-2xl font-bold mb-4 text-center">😚 About Me <h1 className="wave">👋</h1></h1>
+          <h1 className="text-2xl font-bold mb-4 text-center">🧑🏻‍💼 RESUME </h1>
         </div>
         <div className="mt-12 pr-4 grid grid-cols-2 gap-4 w-full">
           {/* left box */}

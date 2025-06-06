@@ -1,13 +1,57 @@
 import { useState } from 'react';
+import LetsGoText from './LetsGoText';
+import HoverVideo from './HoverVideo';
+import ImageCarousel from './ImageCarousel';
+
+
+const imagePaths = [
+  "/Soccer.JPEG",
+  "/First_Show.JPEG",
+  "/Nutrition.JPEG",
+  "/Garden.JPEG",
+  "/Thank_You.JPEG",
+  "/Art.JPEG",
+  "/Piano.JPEG",
+];
+
+
+const CollapsibleSection = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="border-l-4 border-pink-500 pl-4 space-y-2">
+      <button
+        onClick={() => setOpen(!open)}
+        className="text-pink-500 font-semibold hover:text-pink-700"
+      >
+        {open ? `Hide ${title}` : `Read More: ${title}`}
+      </button>
+
+      <div
+        className={`transition-all duration-500 ease-in-out overflow-hidden ${
+          open ? "max-h-[2000px] opacity-100 mt-4" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="text-gray-800 text-lg space-y-3">{children}</div>
+      </div>
+    </div>
+  );
+};
+
 
 function Home() {
-  const [show, setShow] = useState(false);
-  
+
   return (
     <>
       <main className="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120">
         <div className="h-full overflow-y-auto p-6 bg-gray-100 rounded-lg shadow-lg space-y-6">
-          <h1 className="text-2xl font-bold mb-4 text-center">🏠 Home</h1>
+          <h1 className="text-2xl font-bold mb-4 text-center"><h1 className="wave">👋</h1> Hello, I'm Hoan — Nice to Meet You </h1>
         </div>
 
         <div></div>
@@ -15,183 +59,183 @@ function Home() {
         {/* Blog Article */}
         <div className="max-w-3xl mx-auto px-4 pt-6 pb-12 lg:pt-10 lg:px-8 sm:px-6">
           <div className="max-w-2xl">
+
             {/* Avatar Media */}
-            <div className="flex justify-between items-center mb-6">
-              <div className="flex w-full gap-x-5 sm:items-center sm:gap-x-3">
-                <div className="shrink-0">
-                  <img className="size-12 rounded-full" src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar" />
-                </div>
-
-                <div className="grow">
-                  <div className="flex justify-between items-center gap-x-2">
-                    <div>
-<div className="relative inline-block">
-      {/* Tooltip Trigger */}
-      <div
-        onMouseEnter={() => setShow(true)}
-        onMouseLeave={() => setShow(false)}
-        className="sm:mb-1 block text-start cursor-pointer"
-      >
-        <span className="font-semibold text-gray-800 dark:text-neutral-200">
-          Leyla Ludic
-        </span>
-
-        {/* Dropdown Card */}
-        {show && (
-          <div className="absolute left-0 top-full mt-2 z-10 max-w-xs bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl dark:bg-neutral-950 dark:divide-neutral-700">
-            {/* Body */}
-            <div className="p-4 sm:p-5">
-              <div className="mb-2 flex w-full sm:items-center gap-x-5 sm:gap-x-3">
-                <div className="shrink-0">
-                  <img
-                    className="size-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
-                    alt="Avatar"
-                  />
-                </div>
-                <div className="grow">
-                  <p className="text-lg font-semibold text-gray-200 dark:text-neutral-200">
-                    Leyla Ludic
-                  </p>
-                </div>
-              </div>
-              <p className="text-sm text-gray-400 dark:text-neutral-400">
-                Leyla is a Customer Success Specialist at Preline and spends her
-                time speaking to in-house recruiters all over the world.
-              </p>
-            </div>
-
-            {/* Footer */}
-            <div className="flex justify-between items-center px-4 py-3 sm:px-5">
-              <ul className="text-xs space-x-3">
-                <li className="inline-block">
-                  <span className="font-semibold text-gray-200 dark:text-neutral-200">56</span>{' '}
-                  <span className="text-gray-400 dark:text-neutral-400">articles</span>
-                </li>
-                <li className="inline-block">
-                  <span className="font-semibold text-gray-200 dark:text-neutral-200">1k+</span>{' '}
-                  <span className="text-gray-400 dark:text-neutral-400">followers</span>
-                </li>
+            <div className="flex items-center mb-4">
+              <img className="w-12 h-12 object-cover rounded-full mr-4" src="Avatar.jpeg" alt="Avatar" />
+              <ul className="text-sm text-gray-500">
+                <li>June 6th</li>
+                <li>10 min read</li>
               </ul>
-
-              <button
-                type="button"
-                className="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-              >
-                <svg
-                  className="shrink-0 size-3.5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                  <path
-                    fillRule="evenodd"
-                    d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
-                  />
-                </svg>
-                Follow
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-
-                      <ul className="text-xs text-gray-500 dark:text-neutral-500">
-                        <li className="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                          Jan 18
-                        </li>
-                        <li className="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                          8 min read
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* Button Group */}
-                    <div>
-                      <button type="button" className="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
-                        <svg className="size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                          <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-                        </svg>
-                        Tweet
-                      </button>
-                    </div>
-                    {/* End Button Group */}
-                  </div>
-                </div>
-              </div>
             </div>
             {/* End Avatar Media */}
 
             {/* Content */}
-            <div className="space-y-5 md:space-y-8">
-              <div className="space-y-3">
-                <h2 className="text-2xl font-bold md:text-3xl dark:text-white">Announcing a free plan for small teams</h2>
+              <div className="space-y-8 md:space-y-10">
+                {/* Intro */}
+                <div className="space-y-3">
+                  <p className="text-lg text-gray-800">
+                    Good morning! My name is Hoan, pronounced just like Juan. I sometimes joke that I’m the Asian Juan — if that helps lock it in 😄
+                  </p>
+                  <p className="text-lg text-gray-800">
+                    This post is part intro, part portfolio, and part reflection — whether you’re a computer science recruiter, engineering recruiter, or just someone curious about the kind of person I am, I hope you enjoy getting to know me.
+                  </p>
+                </div>
 
-                <p className="text-lg text-gray-800 dark:text-neutral-200">At preline, our mission has always been focused on bringing openness and transparency to the design process. We've always believed that by providing a space where designers can share ongoing work not only empowers them to make better products, it also helps them grow.</p>
+                <LetsGoText />
+
+      <button className="mt-20 px-4 py-2 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 bg-white transition-transform duration-300 ease-in-out hover:bg-purple-600 hover:border-transparent hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">
+    <div className="text-animation">
+      <span>L</span>
+      <span>e</span>
+      <span>t</span>
+      <span>'</span>
+      <span>s</span>
+      <span>G</span>
+      <span>O</span>
+    </div>
+  </button>
+
+
+                {/* CS Recruiter Section */}
+                <CollapsibleSection title="💻 For Computer Science">
+                  <p>
+                    I’m a master’s student studying Applied Computer Science at Grand Valley State University. I’m working on my badges in Data Analytics, Database Management, Software Design and Development, and Web and Mobile. The naming might sound a bit distracting, but if I were to narrow down what I actually do, it would be software and database management and development — which is just something every computer science and software engineering student does anyway.
+                  </p>
+                  <p>
+                    During my first year as a graduate student, I had the chance to work on several meaningful projects. For example, a project focused on databases:{" "}
+                    <a href="https://github.com/clcik-click/CIS660_Project" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                      CIS660 Project
+                    </a>, a project involving a machine learning AI agent:{" "}
+                    <a href="https://github.com/imtiendat0311/AI-Agent" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                      AI Agent Project
+                    </a>, and a project using MA visual detection:{" "}
+                    <a href="https://github.com/clcik-click/CIS671_Projec" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                      CIS671 Project
+                    </a>. There were many smaller projects too, but those are a few highlights of the things I took the time to document :)
+                  </p>
+                  <p>
+                    On top of that, I’m currently working as an intern at Blue Nucleus, where we provide custom software development services to real-world industry clients. It’s been a great learning experience so far.
+                  </p>
+                  <p>
+                    I’m always eager to learn and I really enjoy challenging myself :))
+                  </p>
+                </CollapsibleSection>
+
+                {/* Engineering Recruiter Section */}
+                <CollapsibleSection title="🛠️ For Engineering">
+                  
+<div className="p-4">
+
+<div className="flex justify-center items-start gap-6 mb-6 max-w-[800px] mx-auto px-4">
+  {/* Left: Static Image */}
+  <img
+    src="/Engineer_School.JPEG"
+    alt="Preview"
+    className="w-[200px] h-[200px] object-cover rounded shadow"
+  />
+
+  {/* Center: Hover Video */}
+  <div className=" rounded shadow overflow-hidden bg-black">
+    <HoverVideo src="/Engineer.mp4" />
+  </div>
+
+  {/* Right: Regular Video */}
+  <video
+    src="/Engineer_Pallet.MP4"
+    muted
+    controls
+    className="w-[200px] h-[200px] object-contain rounded shadow bg-black"
+  >
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+
+
+
+
+  <div className="space-y-4 text-gray-800 text-lg">
+    <p>
+      I also have a degree in Electrical Engineering from GVSU. I started at viastore (now a TOYOTA Automated Logistics Company) as an intern and eventually got hired full-time as a Controls Engineer. I spent close to five years there — and I enjoyed every bit of it.
+    </p>
+    <p>
+      At viastore, I specialized in commissioning, testing, and designing Human-Machine Interfaces (HMIs). I’ve worked on various projects for customers like General Motors, Dollar General, Gordon Food Service, and Tyson Foods, just to name a few.
+    </p>
+    <p>
+      If you're curious about my work back then, here’s a link to my capstone project from senior year:
+    </p>
+    <p>
+      <a
+        href="https://www.gvsu.edu/engineering/2021-engineering-design-conference-gvsu-department-of-chemistry-243.htm"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 hover:underline"
+      >
+        2021 GVSU Engineering Design Conference – Department of Chemistry
+      </a>
+    </p>
+  </div>
+</div>
+
+                </CollapsibleSection>
+
+                {/* Personal Section */}
+                <CollapsibleSection title="🌱 For Anyone Interested in Knowing Me">
+
+<div className="p-4">
+  <div className="flex justify-center mb-6">
+    <div className="flex justify-center p-4">
+      <ImageCarousel images={imagePaths} />
+    </div>
+  </div>
+
+
+  <div className="space-y-4 text-gray-800 text-lg">
+                  <p>
+                    I’m someone who likes to try new ideas. I often find myself asking, “Why not?” — and that curiosity has led me to do a lot of unexpected things.
+                  </p>
+                  <p>
+                    I’m glad I started playing soccer again with friends. I was horrible at it in school, but now it’s just fun. I tried pottery too — and now I know I’m not very good at it, but I enjoyed the process anyway. Same thing with rock climbing — turns out I need to train more, but I’m learning. I also started going to live performances. My first Broadway show was in New York City, and since then, I’ve been to many more. That extended into a love for symphonies and all kinds of performances. I just think they’re so cool.
+                  </p>
+                  <p>
+                    Eventually, I got curious about nutrition because I wanted to feel better and perform better in my day-to-day life. That led me to become a certified nutrition coach. So far, I only have two clients — but I enjoy working with them and getting to know them deeply. One thing led to another, and that interest in nutrition turned into me working on my own little plot of garden (one of my clients/friends suggested the idea). Something I didn’t think I’d do until I owned a house (which, during this economy, would be quite a challenge). Still, I’m doing it now.
+                  </p>
+                  <p>
+                    But the thing I’m most proud of — the thing I used to dream about when I was struggling to survive in college — is learning to play the piano. I finally started, and I’m still learning, but now I can play my{" "}   
+                    <a
+                      href="https://www.youtube.com/watch?v=PTIMTGjWDbg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline"
+                    >favorite song</a>
+                    
+                    . And that makes me really happy :))
+                  </p>
+  </div>
+</div>
+                
+
+                </CollapsibleSection>
+
+                {/* Conclusion */}
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-semibold">✨ In Conclusion</h3>
+                  <p className="text-lg text-gray-800">
+                    Whether you’re here for my technical background or just curious about the person behind the resume — thank you for taking the time.
+                  </p>
+                  <p className="text-lg text-gray-800">
+                    I’m a builder, a learner, and a doer. I’ve worn different hats, from engineer to developer to coach — and every experience adds a new layer to how I think and solve problems.
+                  </p>
+                  <p className="text-lg text-gray-800">
+                    If any of this resonates with you — whether you have an opportunity in mind or just want to connect — I’d love to hear from you.
+                  </p>
+                  <p className="text-lg text-gray-800">Thanks again for stopping by. 🙏</p>
+                </div>
+
               </div>
-
-              <p className="text-lg text-gray-800 dark:text-neutral-200">We're proud to be a part of creating a more open culture and to continue building a product that supports this vision.</p>
-
-              <figure>
-                <img className="w-full object-cover rounded-xl" src="Ramen.jpeg" alt="Blog Image" />
-                <figcaption className="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
-                  A woman sitting at a table.
-                </figcaption>
-              </figure>
-
-              <p className="text-lg text-gray-800 dark:text-neutral-200">As we've grown, we've seen how Preline has helped companies such as Spotify, Microsoft, Airbnb, Facebook, and Intercom bring their designers closer together to create amazing things. We've also learned that when the culture of sharing is brought in earlier, the better teams adapt and communicate with one another.</p>
-
-              <p className="text-lg text-gray-800 dark:text-neutral-200">That's why we are excited to share that we now have a <a className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" href="#">free version of Preline</a>, which will allow individual designers, startups and other small teams a chance to create a culture of openness early on.</p>
-
-              <blockquote className="text-center p-4 sm:px-7">
-                <p className="text-xl font-medium text-gray-800 md:text-2xl md:leading-normal xl:text-2xl xl:leading-normal dark:text-neutral-200">
-                  To say that switching to Preline has been life-changing is an understatement. My business has tripled and I got my life back.
-                </p>
-                <p className="mt-5 text-gray-800 dark:text-neutral-200">
-                  Nicole Grazioso
-                </p>
-              </blockquote>
-
-              <figure>
-                <img className="w-full object-cover rounded-xl" src="Ramen.jpeg" alt="Blog Image" />
-                <figcaption className="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
-                  A man and a woman looking at a cell phone.
-                </figcaption>
-              </figure>
-
-              <div className="space-y-3">
-                <h3 className="text-2xl font-semibold dark:text-white">Bringing the culture of sharing to everyone</h3>
-
-                <p className="text-lg text-gray-800 dark:text-neutral-200">We know the power of sharing is real, and we want to create an opportunity for everyone to try Preline and explore how transformative open communication can be. Now you can have a team of one or two designers and unlimited spectators (think PMs, management, marketing, etc.) share work and explore the design process earlier.</p>
-              </div>
-
-              <ul className="list-disc list-outside space-y-5 ps-5 text-lg text-gray-800 dark:text-neutral-200">
-                <li className="ps-2">Preline allows us to collaborate in real time and is a really great way for leadership on the team to stay up-to-date with what everybody is working on," <a className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" href="#">said</a> Stewart Scott-Curran, Intercom's Director of Brand Design.</li>
-                <li className="ps-2">Preline opened a new way of sharing. It's a persistent way for everyone to see and absorb each other's work," said David Scott, Creative Director at <a className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" href="#">Eventbrite</a>.</li>
-              </ul>
-
-              <p className="text-lg text-gray-800 dark:text-neutral-200">Small teams and individual designers need a space where they can watch the design process unfold, both for themselves and for the people they work with – no matter if it's a fellow designer, product manager, developer or client. Preline allows you to invite more people into the process, creating a central place for conversation around design. As those teams grow, transparency and collaboration becomes integrated in how they communicate and work together.</p>
-
-              <div>
-                <a className="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
-                  Plan
-                </a>
-                <a className="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
-                  Web development
-                </a>
-                <a className="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
-                  Free
-                </a>
-                <a className="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
-                  Team
-                </a>
-              </div>
-            </div>
             {/* End Content */}
+
           </div>
         </div>
         {/* End Blog Article */}
