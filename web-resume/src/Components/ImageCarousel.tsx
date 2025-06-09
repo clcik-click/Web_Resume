@@ -10,7 +10,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onFullscreenChang
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [highlightIndex, setHighlightIndex] = useState(0);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
-  const [playing, setPlaying] = useState(true); // NEW
+  const [playing, setPlaying] = useState(false); // NEW
 
   // Auto-rotate highlight
   useEffect(() => {
@@ -96,7 +96,7 @@ useEffect(() => {
         ))}
       </div>
 
-      <div className="flex justify-end px-4 py-2">
+      <div className="flex justify-center px-4 py-2">
         <button
           onClick={togglePlaying}
           className="px-4 py-1 bg-pink-500 text-white rounded hover:bg-pink-600 transition"
