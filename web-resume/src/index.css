@@ -90,4 +90,40 @@
     border-radius: 3px;
   }
 
+.flip-card {
+  perspective: 1200px;
+}
+
+.flip-inner {
+  transition: transform 1.2s ease-in-out; /* Slower and smooth */
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(-180deg); /* Book-like: right to left */
+}
+
+.flip-front,
+.flip-back {
+  backface-visibility: hidden;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem; /* rounded-xl */
+  overflow: hidden;
+}
+
+.flip-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.flip-back {
+  transform: rotateY(-180deg);
+}
+
+
 }
