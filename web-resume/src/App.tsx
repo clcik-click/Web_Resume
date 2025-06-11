@@ -113,8 +113,8 @@ function App() {
 
             <section className="mt-12 hidden lg:block">
               {/* Player Stats Title */}
-              <h2 className="text-xl font-bold text-slate-800 border-b border-pink-300 pb-1 mb-6">
-                Player #1
+              <h2 className="text-right text-xl font-bold text-slate-800 border-b border-pink-300 pb-1 mb-6">
+                Hoàn Lâm
               </h2>     
 
               <div className="space-y-4 mt-6 ">
@@ -139,7 +139,7 @@ function App() {
                 onClick={() => setExpanded(!expanded)}
                 className="mt-3 text-sm font-semibold text-pink-400 hover:text-pink-600 active:text-pink-700"
               >
-                {expanded ? 'Show less' : 'Show more'}
+                {expanded ? 'Some stats' : 'Full stats'}
               </button>
             </section>
 

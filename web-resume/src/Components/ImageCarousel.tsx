@@ -18,7 +18,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onFullscreenChang
 
     const interval = setInterval(() => {
       setHighlightIndex((prev) => (prev + 1) % images.length);
-    }, 5000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [playing, images.length]); // Include playing in deps

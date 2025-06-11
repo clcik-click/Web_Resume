@@ -68,7 +68,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
             rel="noopener noreferrer"
             className="mt-4 inline-block text-sm text-pink-500 hover:underline"
           >
-            View Demo →
+            Link →
           </a>
         )}
       </div>
