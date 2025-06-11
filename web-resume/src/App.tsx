@@ -6,12 +6,10 @@ import Puzzle from './Puzzle';
 
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import MusicBar from './Components/MusicBar';
-
 import { useState } from 'react';
 
 function App() {
   const [expanded, setExpanded] = useState(false);
-
   const [expanded2, setExpanded2] = useState(false);
 
   const credits = [
@@ -31,20 +29,20 @@ function App() {
     { name: "Curiosity Level", value: 100 },
     { name: "Creative Juice", value: 100 },
     { name: "Team Player Energy", value: 100 },
-    { name: "Debugging Mojo", value: 92 },
-    { name: "Caffeine Reliance", value: 65 },
-    { name: "Social Battery", value: 60 },
-    { name: "Balance Game (Work/Life)", value: 58 },
-    { name: "Search Engine Mastery", value: 99 },
-    { name: "Overthinking Tendency", value: 77 },
-    { name: "Soccer Comeback Mode", value: 72 },
-    { name: "Pottery Precision", value: 28 },
-    { name: "Grip Strength (Climbing)", value: 43 },
+    { name: "Debugging Mojo", value: 99 },
+    { name: "Caffeine Reliance", value: 21 },
+    { name: "Social Battery", value: 45 },
+    { name: "Balance Game (Work/Life)", value: 90 },
+    { name: "Search Engine Mastery", value: 100 },
+    { name: "Overthinking Tendency", value: 90 },
+    { name: "Soccer Comeback Mode", value: 87 },
+    { name: "Pottery Precision", value: 11 },
+    { name: "Grip Strength (Climbing)", value: 23 },
     { name: "Live Show Enthusiasm", value: 95 },
-    { name: "Nutrition Coaching Vibes", value: 82 },
-    { name: "Plant Parenting", value: 67 },
-    { name: "Broadway Level Hype", value: 98 },
-    { name: "Piano Progression", value: 87 },
+    { name: "Nutrition Coaching Vibes", value: 63 },
+    { name: "Plant Parenting", value: 43 },
+    { name: "Broadway Level Hype", value: 89 },
+    { name: "Piano Progression", value: 81 },
   ];
 
   const visibleCredits = expanded2 ? credits : credits.slice(0, 4);
@@ -117,7 +115,6 @@ function App() {
                 >
                   🧩
                 </NavLink>   
-
               </nav>
             </div>
 
@@ -126,7 +123,6 @@ function App() {
               {/* A picture */}
               <a className ="relative mx-auto block w-48 overflow-hidden rounded-lg bg-slate-200 shadow-xl shadow-slate-200 sm:w-64 sm:rounded-xl lg:w-auto lg:rounded-2xl">
                 <img src="/TAB/Avatar.jpeg" />
-                <div className="absolute inset-0 rounded-lg ring-1 ring-black/10 ring-inset sm:rounded-xl lg:rounded-2xl"></div>
               </a>
 
             <section className="mt-12 hidden lg:block">
@@ -166,7 +162,7 @@ function App() {
             {/* Social Media */}
             <section className="mt-10 lg:mt-12">
               <h1 className="text-lg font-bold text-slate-800 mb-2">CONNECT</h1>
-              <ul role="list" className="space-y-6 text-lg text-blue-600 font-medium mt-4">
+              <ul role="list" className="space-y-6 text-lg text-blue-600 font-medium mt-6">
                 <li>
                   <a
                     href="https://www.linkedin.com/in/hoan-lam-3b72a5179/"
@@ -198,6 +194,17 @@ function App() {
                   >
                     <span>🎶</span>
                     <span className="group-hover:underline">Spotify</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/hoanlam.hl/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 group"
+                  >
+                    <span>📷</span>
+                    <span className="group-hover:underline">Instagram</span>
                   </a>
                 </li>
               </ul>

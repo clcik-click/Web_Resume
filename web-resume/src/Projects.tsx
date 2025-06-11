@@ -46,10 +46,10 @@ const projectData = {
     category: "💻 Computer Science",
     description:
       `This project analyzes e-commerce consumer behavior to generate insights for online business owners. 
-      I’ll build an ETL pipeline using Kestra to process data (hosted on GitHub) and load it into PostgreSQL, 
+      I’ll build an ETL pipeline using Kestra to process data and load it into PostgreSQL, 
       with both services running in Docker. The cleaned data will then be analyzed in a local Python notebook, 
       and key findings visualized in Google Looker Studio for a user-friendly presentation.`,
-    techStack: ["Python", "Gemini", "PostgreSOL", "Docker", "Google Looker Studio"],
+    techStack: ["Python", "PostgreSOL", "Docker", "Google Looker Studio"],
     screenshots: [],
     demoLink: "https://github.com/clcik-click/CIS660_Project",
   },

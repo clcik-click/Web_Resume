@@ -12,7 +12,7 @@ function Resume() {
     <>
       <main className="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120">
         <div className="h-full overflow-y-auto p-6 bg-gray-100 rounded-lg shadow-lg space-y-6">
-          <h1 className="text-2xl font-bold mb-4 text-center">💼 RESUME </h1>
+          <h1 className="text-2xl font-bold mb-4 text-center">💼 Resume </h1>
         </div>
 
         <div className="max-w-3xl mx-auto px-4 pt-6 pb-12 lg:pt-10 lg:px-8 sm:px-6">
@@ -221,6 +221,7 @@ function Resume() {
               >
                 🎓
               </a>
+              <a>-</a>
               <a
                 href="pdfs/RESUME_Engineering.pdf"
                 download
@@ -230,8 +231,21 @@ function Resume() {
                 }`}
                 title="Download Resume"
               >
-                📄
+                🛠️📄
               </a>
+              <a>-</a>
+              <a
+                href="pdfs/RESUME_Computer_Science.pdf"
+                download
+                onClick={handleClick}
+                className={`text-2xl transition-transform cursor-pointer active:scale-110 ${
+                  !clicked ? 'animate-bounce' : ''
+                }`}
+                title="Download Resume"
+              >
+                💻📄
+              </a>
+
             </div>
           </div>
 
