@@ -1,11 +1,13 @@
 import './index.css'
 import Home from "./Home";
+import Resume from './Resume';
 import Projects from './Projects';
+import Puzzle from './Puzzle';
+
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import MusicBar from './Components/MusicBar';
 
 import { useState } from 'react';
-import Resume from './Resume';
 
 function App() {
   const [expanded, setExpanded] = useState(false);
@@ -13,15 +15,16 @@ function App() {
   const [expanded2, setExpanded2] = useState(false);
 
   const credits = [
-    "Background music by John Doe",
-    "Emoji illustrations by OpenMoji",
-    "UI design inspired by Tailwind UI",
-    "Animation style by CodePen examples",
-    "Audio syncing logic by StackOverflow user 123",
-    "Font: DSEG7 Classic by Keshikan",
-    "Icons from Heroicons",
-    "Layout reference from Vercel’s blog",
-    "Waveform effect by MyNoise",
+    "Song by Christopher Wong",                         // Original content — creative work
+    "Photos by Đức Anh, Hoàng Anh",                     // Original visual contributions
+    "Comming soon from prismic.io",                     // Core CMS / main platform
+    "Layout from transmit.tailwindui.com",              // Major design/layout inspiration
+    "Project page from gridbyexample.com",              // Specific page structure
+    "Timeline from cruip.com",                          // Component or layout influence
+    "Home page from preline.co",                        // General homepage layout/style
+    "Stats bar from bizstream.com",                     // UI component influence
+    "Emoji from emojipedia.org",                        // Minor graphical assets
+    "Assisted by OpenAI, Google",                       // Indirect general support
   ];
 
   const stats = [
@@ -100,6 +103,21 @@ function App() {
                 >
                   📒
                 </NavLink>
+
+                <NavLink
+                  to="/puzzle"
+                  className={({ isActive }) =>
+                    `flex items-center justify-center h-10 w-10 rounded-full transition-colors duration-200 ${
+                      isActive
+                        ? 'bg-pink-100 text-pink-700 font-bold shadow-inner'
+                        : 'text-pink-500 hover:bg-slate-200 hover:text-pink-700'
+                    }`
+                  }
+                  title="Puzzle"
+                >
+                  🧩
+                </NavLink>   
+
               </nav>
             </div>
 
@@ -167,7 +185,7 @@ function App() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 group"
                   >
-                    <span>😸</span>
+                    <span>🐈‍⬛</span>
                     <span className="group-hover:underline">GitHub</span>
                   </a>
                 </li>
@@ -210,6 +228,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/puzzle" element={<Puzzle />} />
         </Routes>
       </BrowserRouter>
     </>
