@@ -81,7 +81,9 @@ useEffect(() => {
 <img
   key={i}
   src={src}
-  ref={(el) => (imageRefs.current[i] = el)}
+  ref={(el) => {
+    imageRefs.current[i] = el;
+  }}
   onClick={() => openImage(i)}
   onKeyDown={(e) => e.key === "Enter" && setSelectedIndex(i)}
   role="button"

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ComingSoon = () => {
   return (
     <div className="w-full h-full flex justify-center items-center bg-black dark:bg-white">

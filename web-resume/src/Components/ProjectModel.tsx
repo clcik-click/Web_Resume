@@ -37,7 +37,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
         </h2>
         <p className="text-zinc-700 dark:text-zinc-300 mb-4">{project.description}</p>
 
-        {project.techStack?.length > 0 && (
+        {Array.isArray(project.techStack) && project.techStack.length > 0 && (
           <div className="mb-4">
             <h4 className="text-pink-500 font-semibold mb-1">Tech Stack</h4>
             <ul className="list-disc list-inside text-sm text-zinc-700 dark:text-zinc-300">
@@ -48,7 +48,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
           </div>
         )}
 
-        {project.screenshots?.length > 0 && (
+        {Array.isArray(project.screenshots) && project.screenshots.length > 0 && (
           <div className="grid grid-cols-2 gap-2">
             {project.screenshots.map((src, i) => (
               <img
