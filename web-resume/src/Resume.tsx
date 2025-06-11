@@ -4,10 +4,9 @@ import TimelineItem from "./Components/TimeLineItem";
 import { useState } from 'react';
 
 function Resume() {
-  const [clicked, setClicked] = useState(false);
-  const handleClick = () => {
-    setClicked(true);
-  };
+  const [clicked1, setClicked1] = useState(false);
+  const [clicked2, setClicked2] = useState(false);
+
   return (
     <>
       <main className="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120">
@@ -225,9 +224,9 @@ function Resume() {
               <a
                 href="pdfs/RESUME_Engineering.pdf"
                 download
-                onClick={handleClick}
+                onClick={() => setClicked1(true)}
                 className={`text-2xl transition-transform cursor-pointer active:scale-110 ${
-                  !clicked ? 'animate-bounce' : ''
+                  !clicked1 ? 'animate-bounce' : ''
                 }`}
                 title="Download Resume"
               >
@@ -237,9 +236,9 @@ function Resume() {
               <a
                 href="pdfs/RESUME_Computer_Science.pdf"
                 download
-                onClick={handleClick}
+                onClick={() => setClicked2(true)}
                 className={`text-2xl transition-transform cursor-pointer active:scale-110 ${
-                  !clicked ? 'animate-bounce' : ''
+                  !clicked2 ? 'animate-bounce' : ''
                 }`}
                 title="Download Resume"
               >
