@@ -1,14 +1,4 @@
-import React from "react";
-
-interface Project {
-  title: string;
-  date: string;
-  category?: string;
-  description?: string;
-  techStack?: string[];
-  screenshots?: string[];
-  demoLink?: string;
-}
+import type { Project } from "../../data/projects";
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -21,10 +11,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-6 max-w-2xl w-full relative">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl p-6 max-w-2xl w-full relative border border-transparent dark:border-slate-800">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-zinc-500 hover:text-zinc-900 dark:hover:text-white text-xl"
+          className="absolute top-3 right-3 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white text-xl"
         >
           ✕
         </button>
@@ -35,12 +25,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
         <h2 className="text-xl font-bold text-pink-600 dark:text-pink-300 mb-2">
           {project.title}
         </h2>
-        <p className="text-zinc-700 dark:text-zinc-300 mb-4">{project.description}</p>
+        <p className="text-slate-700 dark:text-slate-300 mb-4">{project.description}</p>
 
         {Array.isArray(project.techStack) && project.techStack.length > 0 && (
           <div className="mb-4">
             <h4 className="text-pink-500 font-semibold mb-1">Tech Stack</h4>
-            <ul className="list-disc list-inside text-sm text-zinc-700 dark:text-zinc-300">
+            <ul className="list-disc list-inside text-sm text-slate-700 dark:text-slate-300">
               {project.techStack.map((tech, i) => (
                 <li key={i}>{tech}</li>
               ))}

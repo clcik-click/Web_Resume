@@ -26,11 +26,11 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ label, date, title, childre
         <time className="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-emerald-600 bg-emerald-100 rounded-full">
           {date}
         </time>
-        <div className="text-xl font-bold text-slate-900">{title}</div>
+        <div className="text-xl font-bold text-slate-900 dark:text-white">{title}</div>
       </div>
 
       {/* Custom content */}
-      <div className="text-slate-500">{children}</div>
+      <div className="text-slate-500 dark:text-slate-300">{children}</div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface ImageCarouselProps {
@@ -37,41 +37,44 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onFullscreenChang
     }
   }, [highlightIndex]);
 
-  useEffect(() => {
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (selectedIndex === null) return;
-
-    if (e.key === "ArrowLeft") prev();
-    if (e.key === "ArrowRight") next();
-    if (e.key === "Escape") close();
-  };
-
-  window.addEventListener("keydown", handleKeyDown);
-  return () => window.removeEventListener("keydown", handleKeyDown);
-}, [selectedIndex]);
-
-useEffect(() => {
-  imageRefs.current = [];
-}, [images]);
-
-
   const openImage = (i: number) => {
     setSelectedIndex(i);
     onFullscreenChange?.(true);
   };
 
-  const close = () => {
+  const close = useCallback(() => {
     setSelectedIndex(null);
     onFullscreenChange?.(false);
-  };
-  const prev = () =>
+  }, [onFullscreenChange]);
+
+  const prev = useCallback(() => {
     setSelectedIndex((prev) =>
       prev !== null ? (prev - 1 + images.length) % images.length : null
     );
-  const next = () =>
+  }, [images.length]);
+
+  const next = useCallback(() => {
     setSelectedIndex((prev) =>
       prev !== null ? (prev + 1) % images.length : null
     );
+  }, [images.length]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "Escape") close();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [close, next, prev, selectedIndex]);
+
+  useEffect(() => {
+    imageRefs.current = [];
+  }, [images]);
 
   return (
     <div>
@@ -85,7 +88,7 @@ useEffect(() => {
     imageRefs.current[i] = el;
   }}
   onClick={() => openImage(i)}
-  onKeyDown={(e) => e.key === "Enter" && setSelectedIndex(i)}
+  onKeyDown={(e) => e.key === "Enter" && openImage(i)}
   role="button"
   tabIndex={0}
   alt={`thumb-${i}`}

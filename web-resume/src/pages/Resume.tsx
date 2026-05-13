@@ -1,6 +1,7 @@
-import Card from "./Components/Card";
-
-import TimelineItem from "./Components/TimeLineItem";
+import PageHeader from "../components/layout/PageHeader";
+import PageLayout from "../components/layout/PageLayout";
+import Card from "../components/ui/Card";
+import TimelineItem from "../components/ui/TimelineItem";
 import { useState } from 'react';
 
 function Resume() {
@@ -8,16 +9,17 @@ function Resume() {
   const [clicked2, setClicked2] = useState(false);
 
   return (
-    <>
-      <main className="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120">
-        <div className="h-full overflow-y-auto p-6 bg-gray-100 rounded-lg shadow-lg space-y-6">
-          <h1 className="text-2xl font-bold mb-4 text-center">💼 Resume </h1>
-        </div>
+    <PageLayout className="max-w-3xl">
+      <PageHeader
+        title="Resume"
+        description="A combined software and controls engineering background, with hands-on experience across development, automation, and technical support."
+        eyebrow="Experience"
+      />
 
-        <div className="max-w-3xl mx-auto px-4 pt-6 pb-12 lg:pt-10 lg:px-8 sm:px-6">
+        <div className="pb-12">
           {/* Section Title */}
-          <h2 className="text-2xl font-bold text-slate-900 my-6 " id="Work" >Work Experience 🧑‍💼</h2>
-          <hr className="border-t border-slate-300 mb-6" />
+          <h2 className="text-2xl font-bold text-slate-900 my-6 dark:text-white" id="Work" >Work Experience</h2>
+          <hr className="border-t border-slate-300 mb-6 dark:border-slate-800" />
 
           {/* Timeline Item */}
           <div className="-my-6" >
@@ -43,7 +45,7 @@ function Resume() {
               date="2024"
               title="Lab Technician @ Grand Valley State University"
             >
-            <ul className="list-disc list-inside font-medium text-black space-y-2 mt-4">
+            <ul className="list-disc list-inside font-medium text-slate-900 space-y-2 mt-4 dark:text-slate-200">
               <li className="pl-[1.5em] indent-[-1.5em]">
                 Maintained lab equipment for safety and efficiency.
               </li>
@@ -62,7 +64,7 @@ function Resume() {
               date="2022"
               title="L2 Controls Engineer @ Viastore Systems, a TOYOTA Automated Logistics Company"
             >
-            <ul className="list-disc list-inside font-medium text-black space-y-2 mt-4">
+            <ul className="list-disc list-inside font-medium text-slate-900 space-y-2 mt-4 dark:text-slate-200">
               <li className="pl-[1.5em] indent-[-1.5em]">
                 <strong>Clients Served:</strong>  General Motors, Dollar General, Gordon Food Service, Tyson Foods, McMaster-Carr, Mar-Jac Poultry
               </li>
@@ -76,14 +78,14 @@ function Resume() {
                 Led all electrical and programming site activities, including installation, commissioning, testing, and providing stand-by support.
               </li>
 
-              <div className="mt-3 flex justify-center">
+              <li className="list-none mt-3 flex justify-center">
                 <Card
                   title="viastore"
-                  description="Garantee Success !!"
+                  description="Guarantee Success !!"
                   imageSrc="RESUME/viastore.jpg"
                   href="https://www.bastiansolutions.com/viastore-north-america/"
                 />
-              </div>
+              </li>
 
             </ul>
             </TimelineItem>
@@ -114,7 +116,7 @@ function Resume() {
               date="2018"
               title="Food Service Worker @ GVSU Campus Dining"
             >
-              <ul className="list-disc list-inside font-medium text-black space-y-2 mt-4">
+              <ul className="list-disc list-inside font-medium text-slate-900 space-y-2 mt-4 dark:text-slate-200">
                 <li>Issue credits or change due to customers</li>
                 <li>Sterilize dishes, kitchen utensils, and equipment</li>
                 <li>Prepare food according to recipes</li>
@@ -126,7 +128,7 @@ function Resume() {
               date="2017"
               title="Tax Preparer @ Goodwill Industry"
             >
-              <ul className="list-disc list-inside font-medium text-black space-y-2 mt-4">
+              <ul className="list-disc list-inside font-medium text-slate-900 space-y-2 mt-4 dark:text-slate-200">
                 <li>Answer routine tax questions</li>
                 <li>Interview clients on taxable income and deductible expenses</li>
               </ul>
@@ -137,7 +139,7 @@ function Resume() {
               date="2016"
               title="Library Assistant @ Muskegon Community College"
             >
-              <ul className="list-disc list-inside font-medium text-black space-y-2 mt-4">
+              <ul className="list-disc list-inside font-medium text-slate-900 space-y-2 mt-4 dark:text-slate-200">
                 <li>Secured library equipment, including computers, printers, and cameras</li>
                 <li>Maintained the library and instructed patrons on proper use of equipment</li>
               </ul>
@@ -145,8 +147,8 @@ function Resume() {
           </div>
 
           {/* Section Title */}
-          <h2 className="text-2xl font-bold text-slate-900 my-6 " id="Education">Education 🎓</h2>
-          <hr className="border-t border-slate-300 mb-6" />
+          <h2 className="text-2xl font-bold text-slate-900 my-6 dark:text-white" id="Education">Education</h2>
+          <hr className="border-t border-slate-300 mb-6 dark:border-slate-800" />
 
           <div className="-my-6" >
             <TimelineItem
@@ -154,7 +156,7 @@ function Resume() {
               date="2024"
               title="Grand Valley State University"
             >
-              <ul className="list-disc list-inside font-medium text-black space-y-2 mt-4">
+              <ul className="list-disc list-inside font-medium text-slate-900 space-y-2 mt-4 dark:text-slate-200">
                 <li className="pl-[1.5em] indent-[-1.5em]">
                   Master of Science in Applied Computer Science 
                 </li>
@@ -172,7 +174,7 @@ function Resume() {
               date="2018"
               title="Grand Valley State University"
             >
-              <ul className="list-disc list-inside font-medium text-black space-y-2 mt-4">
+              <ul className="list-disc list-inside font-medium text-slate-900 space-y-2 mt-4 dark:text-slate-200">
                 <li className="pl-[1.5em] indent-[-1.5em]">
                   Bachelor of Science in Engineering, Electrical Engineering 
                 </li>
@@ -187,7 +189,7 @@ function Resume() {
               date="2016"
               title="Muskegon Community College"
             >
-            <ul className="list-disc list-inside font-medium text-black space-y-2 mt-4">
+            <ul className="list-disc list-inside font-medium text-slate-900 space-y-2 mt-4 dark:text-slate-200">
               <li className="pl-[1.5em] indent-[-1.5em]">
                 Phi Theta Kappa Honor Society member 
               </li>
@@ -205,44 +207,44 @@ function Resume() {
           </div>
 
           <div className="sticky bottom-6 inset-x-0 text-center z-50 mt-10">
-            <div className="inline-flex bg-pink-100 border border-pink-300 shadow-md rounded-full py-2 px-4 gap-4 dark:bg-pink-200 dark:border-pink-400">
+            <div className="inline-flex bg-white border border-slate-200 shadow-md rounded-full py-2 px-4 gap-4 dark:border-slate-800 dark:bg-slate-900">
               <a
                 href="#Work"
-                className="text-2xl active:scale-110 transition-transform cursor-pointer"
+                className="text-sm font-semibold text-slate-700 hover:text-pink-600 active:scale-110 transition-transform cursor-pointer dark:text-slate-300 dark:hover:text-pink-400"
                 title="Work Experience"
               >
-                🧑‍💼
+                Work
               </a>
               <a
                 href="#Education"
-                className="text-2xl active:scale-110 transition-transform cursor-pointer"
+                className="text-sm font-semibold text-slate-700 hover:text-pink-600 active:scale-110 transition-transform cursor-pointer dark:text-slate-300 dark:hover:text-pink-400"
                 title="Education"
               >
-                🎓
+                Education
               </a>
-              <a>-</a>
+              <span className="text-slate-300 dark:text-slate-700">|</span>
               <a
                 href="pdfs/RESUME_Engineering.pdf"
                 download
                 onClick={() => setClicked1(true)}
-                className={`text-2xl transition-transform cursor-pointer active:scale-110 ${
+                className={`text-sm font-semibold text-slate-700 hover:text-pink-600 transition-transform cursor-pointer active:scale-110 dark:text-slate-300 dark:hover:text-pink-400 ${
                   !clicked1 ? 'animate-bounce' : ''
                 }`}
-                title="Download Resume"
+                title="Download engineering resume"
               >
-                🛠️📄
+                Engineering PDF
               </a>
-              <a>-</a>
+              <span className="text-slate-300 dark:text-slate-700">|</span>
               <a
                 href="pdfs/RESUME_Computer_Science.pdf"
                 download
                 onClick={() => setClicked2(true)}
-                className={`text-2xl transition-transform cursor-pointer active:scale-110 ${
+                className={`text-sm font-semibold text-slate-700 hover:text-pink-600 transition-transform cursor-pointer active:scale-110 dark:text-slate-300 dark:hover:text-pink-400 ${
                   !clicked2 ? 'animate-bounce' : ''
                 }`}
-                title="Download Resume"
+                title="Download computer science resume"
               >
-                💻📄
+                CS PDF
               </a>
 
             </div>
@@ -250,8 +252,7 @@ function Resume() {
 
         </div>
 
-      </main>
-    </>
+    </PageLayout>
   );
 }
 

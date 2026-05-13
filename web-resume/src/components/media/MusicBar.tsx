@@ -57,24 +57,24 @@ export default function MusicBar() {
     <div className="w-full max-w-2xl mx-auto mt-8 px-4">
       <audio ref={audioRef} src="musics/bg_music.mp3" hidden loop/>
 
-      <div className="flex items-center gap-2 bg-white p-3 rounded shadow">
+      <div className="flex items-center gap-2 bg-white p-3 rounded shadow dark:bg-slate-900 dark:border dark:border-slate-800">
         {/* Play/Pause */}
         <button
           onClick={togglePlayPause}
-          className="text-pink-600 hover:text-pink-700"
+          className="text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300"
         >
           {isPlaying ? '⏸️' : '▶️'}
         </button>
 
         {/* Time */}
-        <span className="text-sm text-gray-600 w-12 text-right">{formatTime(currentTime)}</span>
+        <span className="text-sm text-slate-600 w-12 text-right dark:text-slate-300">{formatTime(currentTime)}</span>
 
         {/* Progress Bar */}
-        <div className="relative w-full h-2 bg-gray-300 rounded cursor-pointer" onClick={handleSeek}>
+        <div className="relative w-full h-2 bg-slate-300 rounded cursor-pointer dark:bg-slate-700" onClick={handleSeek}>
           <div className="h-full bg-pink-500 rounded" style={{ width: `${progress}%` }} />
         </div>
 
-        <span className="text-sm text-gray-600 w-12">{formatTime(duration)}</span>
+        <span className="text-sm text-slate-600 w-12 dark:text-slate-300">{formatTime(duration)}</span>
 
         {/* Volume */}
         <input
@@ -95,4 +95,3 @@ export default function MusicBar() {
     </div>
   );
 }
-
