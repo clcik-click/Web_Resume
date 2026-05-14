@@ -1,4 +1,4 @@
-import{r as Li,j as El}from"./index-DQUPS-1P.js";/**
+import{r as Li,j as El}from"./index-B3NWqLsU.js";/**
  * @license
  * Copyright 2010-2026 Three.js Authors
  * SPDX-License-Identifier: MIT

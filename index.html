@@ -5,10 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/Web_Resume/grape.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Playground</title>
-    <script type="module" crossorigin src="/Web_Resume/assets/index-DQUPS-1P.js"></script>
+    <script type="module" crossorigin src="/Web_Resume/assets/index-B3NWqLsU.js"></script>
     <link rel="stylesheet" crossorigin href="/Web_Resume/assets/index-BnmINovp.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (function () {
+        try {
+          var storedTheme = localStorage.getItem("theme");
+          var isDark = storedTheme ? storedTheme === "dark" : true;
+          document.documentElement.classList.toggle("dark", isDark);
+        } catch (_e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
   </body>
 </html>
