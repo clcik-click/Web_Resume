@@ -9,7 +9,6 @@ export default function MusicBar() {
     const audio = audioRef.current;
     if (!audio) return;
     audio.volume = 0.22;
-    audio.muted = true;
 
     const syncState = () => setIsPlaying(!audio.paused);
     const onEnded = () => setIsPlaying(false);
@@ -39,7 +38,7 @@ export default function MusicBar() {
 
   return (
     <>
-      <audio ref={audioRef} src="musics/bg_music.mp3" hidden loop muted />
+      <audio ref={audioRef} src="musics/bg_music.mp3" hidden loop />
       <button
         type="button"
         onClick={togglePlayPause}

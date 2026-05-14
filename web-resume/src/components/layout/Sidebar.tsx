@@ -132,7 +132,7 @@ export default function Sidebar() {
               <h1 className="mt-1 text-2xl font-bold text-slate-950 dark:text-white">Hoan Lam</h1>
             </div>
             <img
-              src="/TAB/Avatar.jpeg"
+              src={`${import.meta.env.BASE_URL}TAB/Avatar.jpeg`}
               alt="Hoan Lam"
               className="h-full w-full rounded-lg object-cover object-top"
             />

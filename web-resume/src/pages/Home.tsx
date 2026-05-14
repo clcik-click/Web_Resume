@@ -84,10 +84,10 @@ function Home() {
         </p>
         <div data-hero-item className="mt-7 flex flex-wrap gap-3">
           <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-            <ButtonLink href="/resume">View Resume</ButtonLink>
+            <ButtonLink href={`${import.meta.env.BASE_URL}resume`}>View Resume</ButtonLink>
           </motion.div>
           <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-            <ButtonLink href="/projects" variant="secondary">View Projects</ButtonLink>
+            <ButtonLink href={`${import.meta.env.BASE_URL}projects`} variant="secondary">View Projects</ButtonLink>
           </motion.div>
           <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
             <ButtonLink href="https://www.linkedin.com/in/hoan-lam-3b72a5179/" target="_blank" rel="noopener noreferrer" variant="secondary">
@@ -154,7 +154,7 @@ function Home() {
               I hold an Electrical Engineering degree from GVSU. My senior capstone is documented here:{' '}
               <motion.a
                 whileHover={{ x: 2 }}
-                href="/pdfs/Fluorescent_Decay_Measuring_System.pdf"
+                href={`${import.meta.env.BASE_URL}pdfs/Fluorescent_Decay_Measuring_System.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline dark:text-blue-400"
