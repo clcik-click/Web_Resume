@@ -23,7 +23,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export default function Sidebar() {
   const focusStats = stats.filter((stat) =>
-    ["Curiosity Level", "Team Player Energy", "Debugging Mojo"].includes(stat.name)
+    ["Curiosity Level", "Team Player Energy", "Debugging Mojo","Piano Progression"].includes(stat.name)
   );
 
   return (
@@ -65,20 +65,16 @@ export default function Sidebar() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.4 }}
-          className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/70"
         >
           <div className="space-y-4">
+            <div className="px-1">
+              <h1 className="mt-1 text-2xl font-bold text-slate-950 dark:text-white">Hoan Lam</h1>
+            </div>
             <img
               src="/TAB/Avatar.jpeg"
               alt="Hoan Lam"
-              className="h-64 w-full rounded-lg object-cover object-top"
+              className="h-full w-full rounded-lg object-cover object-top"
             />
-            <div className="px-1">
-              <h1 className="mt-1 text-2xl font-bold text-slate-950 dark:text-white">Hoan Lam</h1>
-              <p className="mt-1 text-sm leading-5 text-slate-600 dark:text-slate-300">
-                Software developer with controls engineering experience.
-              </p>
-            </div>
           </div>
         </motion.section>
 

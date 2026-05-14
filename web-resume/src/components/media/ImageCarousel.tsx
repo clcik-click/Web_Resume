@@ -10,29 +10,27 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onFullscreenChang
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [highlightIndex, setHighlightIndex] = useState(0);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
-  const [playing, setPlaying] = useState(false); // NEW
+  const rowRef = useRef<HTMLDivElement>(null);
 
-  // Auto-rotate highlight
   useEffect(() => {
-    if (!playing) return;
+    if (!images.length) return;
 
     const interval = setInterval(() => {
       setHighlightIndex((prev) => (prev + 1) % images.length);
-    }, 2000);
+    }, 2800);
 
     return () => clearInterval(interval);
-  }, [playing, images.length]); // Include playing in deps
+  }, [images.length]);
 
-  const togglePlaying = () => setPlaying((prev) => !prev);
-
-  // Scroll highlighted thumbnail into view
   useEffect(() => {
     const current = imageRefs.current[highlightIndex];
-    if (current) {
-      current.scrollIntoView({
+    const row = rowRef.current;
+    if (current && row) {
+      const targetLeft = current.offsetLeft - row.clientWidth / 2 + current.clientWidth / 2;
+      const maxLeft = row.scrollWidth - row.clientWidth;
+      row.scrollTo({
+        left: Math.max(0, Math.min(targetLeft, maxLeft)),
         behavior: "smooth",
-        inline: "center",
-        block: "nearest",
       });
     }
   }, [highlightIndex]);
@@ -48,14 +46,14 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onFullscreenChang
   }, [onFullscreenChange]);
 
   const prev = useCallback(() => {
-    setSelectedIndex((prev) =>
-      prev !== null ? (prev - 1 + images.length) % images.length : null
+    setSelectedIndex((prevIndex) =>
+      prevIndex !== null ? (prevIndex - 1 + images.length) % images.length : null
     );
   }, [images.length]);
 
   const next = useCallback(() => {
-    setSelectedIndex((prev) =>
-      prev !== null ? (prev + 1) % images.length : null
+    setSelectedIndex((prevIndex) =>
+      prevIndex !== null ? (prevIndex + 1) % images.length : null
     );
   }, [images.length]);
 
@@ -78,66 +76,55 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onFullscreenChang
 
   return (
     <div>
-      {/* Thumbnail Row */}
-      <div className="flex gap-2 overflow-x-auto p-2">
+      <div ref={rowRef} className="flex max-w-full gap-3 overflow-x-auto px-1 py-2">
         {images.map((src, i) => (
-<img
-  key={i}
-  src={src}
-  ref={(el) => {
-    imageRefs.current[i] = el;
-  }}
-  onClick={() => openImage(i)}
-  onKeyDown={(e) => e.key === "Enter" && openImage(i)}
-  role="button"
-  tabIndex={0}
-  alt={`thumb-${i}`}
-  className={`h-[160px] rounded cursor-pointer object-cover transition-all duration-300 ${
-    highlightIndex === i
-      ? "w-[270px] ring-4 ring-pink-500 scale-105"
-      : "w-[90px] opacity-80"
-  }`}
-/>
+          <img
+            key={i}
+            src={src}
+            ref={(el) => {
+              imageRefs.current[i] = el;
+            }}
+            onClick={() => openImage(i)}
+            onKeyDown={(e) => e.key === "Enter" && openImage(i)}
+            role="button"
+            tabIndex={0}
+            alt={`thumb-${i}`}
+            className={`h-[158px] cursor-pointer rounded-lg object-cover transition-all duration-500 ${
+              highlightIndex === i
+                ? "w-[220px] ring-2 ring-pink-400/70"
+                : "w-[120px] opacity-75 hover:opacity-95"
+            }`}
+          />
         ))}
       </div>
 
-      <div className="flex justify-center px-4 py-2">
-        <button
-          onClick={togglePlaying}
-          className="px-4 py-1 bg-pink-500 text-white rounded hover:bg-pink-600 transition"
-        >
-          {playing ? "Pause" : "Start"}
-        </button>
-      </div>
-
-      {/* Fullscreen Viewer */}
       {selectedIndex !== null && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90">
           <button
             onClick={close}
-            className="absolute top-4 right-4 text-white bg-black bg-opacity-50 p-2 rounded hover:bg-opacity-80"
+            className="absolute right-4 top-4 rounded bg-black/50 p-2 text-white hover:bg-black/80"
           >
             <X />
           </button>
 
           <button
             onClick={prev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black bg-opacity-50 p-2 rounded hover:bg-opacity-80"
+            className="absolute left-4 top-1/2 -translate-y-1/2 rounded bg-black/50 p-2 text-white hover:bg-black/80"
           >
             <ChevronLeft size={32} />
           </button>
 
-          <div className="transition-all duration-300 ease-in-out max-w-[90%] max-h-[90%] flex items-center justify-center">
+          <div className="flex max-h-[90%] max-w-[90%] items-center justify-center transition-all duration-300 ease-in-out">
             <img
               src={images[selectedIndex]}
               alt={`full-${selectedIndex}`}
-              className="w-auto h-auto max-h-[80vh] max-w-[80vw] rounded shadow-lg"
+              className="h-auto max-h-[80vh] w-auto max-w-[80vw] rounded shadow-lg"
             />
           </div>
 
           <button
             onClick={next}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black bg-opacity-50 p-2 rounded hover:bg-opacity-80"
+            className="absolute right-4 top-1/2 -translate-y-1/2 rounded bg-black/50 p-2 text-white hover:bg-black/80"
           >
             <ChevronRight size={32} />
           </button>
