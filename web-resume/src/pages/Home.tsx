@@ -154,7 +154,7 @@ function Home() {
               I hold an Electrical Engineering degree from GVSU. My senior capstone is documented here:{' '}
               <motion.a
                 whileHover={{ x: 2 }}
-                href="https://www.gvsu.edu/engineering/2021-engineering-design-conference-gvsu-department-of-chemistry-243.htm"
+                href="/pdfs/Fluorescent_Decay_Measuring_System.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline dark:text-blue-400"

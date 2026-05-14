@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface ImageCarouselProps {
@@ -74,6 +75,15 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onFullscreenChang
     imageRefs.current = [];
   }, [images]);
 
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = overflow;
+    };
+  }, [selectedIndex]);
+
   return (
     <div>
       <div ref={rowRef} className="flex max-w-full gap-3 overflow-x-auto px-1 py-2">
@@ -98,37 +108,51 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onFullscreenChang
         ))}
       </div>
 
-      {selectedIndex !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90">
+      {selectedIndex !== null && createPortal(
+        <div className="fixed inset-0 z-[220]">
           <button
+            type="button"
+            aria-label="Close fullscreen image viewer"
             onClick={close}
-            className="absolute right-4 top-4 rounded bg-black/50 p-2 text-white hover:bg-black/80"
-          >
-            <X />
-          </button>
+            className="absolute inset-0 h-full w-full bg-slate-950/75 backdrop-blur-md"
+          />
 
-          <button
-            onClick={prev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 rounded bg-black/50 p-2 text-white hover:bg-black/80"
-          >
-            <ChevronLeft size={32} />
-          </button>
+          <div className="relative z-10 flex h-full w-full items-center justify-center px-4 py-6 sm:px-10">
+            <div className="relative flex w-full max-w-6xl items-center justify-center">
+              <button
+                onClick={prev}
+                className="absolute left-1 top-1/2 z-[210] -translate-y-1/2 rounded-full border border-white/30 bg-black/40 p-2 text-white shadow-lg backdrop-blur transition hover:bg-black/65 sm:left-3"
+                aria-label="Previous image"
+              >
+                <ChevronLeft size={24} />
+              </button>
 
-          <div className="flex max-h-[90%] max-w-[90%] items-center justify-center transition-all duration-300 ease-in-out">
-            <img
-              src={images[selectedIndex]}
-              alt={`full-${selectedIndex}`}
-              className="h-auto max-h-[80vh] w-auto max-w-[80vw] rounded shadow-lg"
-            />
+              <div className="relative overflow-hidden rounded-xl border border-white/20 bg-black/30 p-2 shadow-2xl backdrop-blur-sm">
+                <img
+                  src={images[selectedIndex]}
+                  alt={`full-${selectedIndex}`}
+                  className="h-[min(82vh,760px)] w-[min(88vw,1100px)] rounded-lg object-contain"
+                />
+                <button
+                  onClick={close}
+                  className="absolute right-3 top-3 rounded-full border border-white/30 bg-black/45 p-1.5 text-white shadow backdrop-blur transition hover:bg-black/70"
+                  aria-label="Close image"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <button
+                onClick={next}
+                className="absolute right-1 top-1/2 z-[210] -translate-y-1/2 rounded-full border border-white/30 bg-black/40 p-2 text-white shadow-lg backdrop-blur transition hover:bg-black/65 sm:right-3"
+                aria-label="Next image"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
           </div>
-
-          <button
-            onClick={next}
-            className="absolute right-4 top-1/2 -translate-y-1/2 rounded bg-black/50 p-2 text-white hover:bg-black/80"
-          >
-            <ChevronRight size={32} />
-          </button>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

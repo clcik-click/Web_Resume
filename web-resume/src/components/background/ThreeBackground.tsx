@@ -49,6 +49,24 @@ export default function ThreeBackground() {
     let animationFrame = 0;
 
     const themeAwareMaterials: Array<THREE.Material> = [];
+    const fishMaterials: THREE.MeshBasicMaterial[] = [];
+
+    const accentHue = () => {
+      const accent = document.documentElement.getAttribute("data-accent");
+      const map: Record<string, number> = {
+        pink: 0.92,
+        blue: 0.60,
+        emerald: 0.43,
+        violet: 0.74,
+        orange: 0.08,
+        teal: 0.50,
+        rose: 0.97,
+        amber: 0.12,
+        cyan: 0.53,
+        lime: 0.23,
+      };
+      return map[accent ?? "pink"] ?? 0.92;
+    };
 
     const addNebulaScene = () => {
       const particleCount = 120;
@@ -65,7 +83,7 @@ export default function ThreeBackground() {
       geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
       const material = new THREE.PointsMaterial({
-        color: 0xdb2777,
+        color: new THREE.Color().setHSL(accentHue(), 0.72, 0.54),
         size: 0.055,
         transparent: true,
         opacity: 0.52,
@@ -86,7 +104,7 @@ export default function ThreeBackground() {
       lineGeometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
 
       const lineMaterial = new THREE.LineBasicMaterial({
-        color: 0x0f172a,
+        color: new THREE.Color().setHSL(accentHue(), 0.55, 0.30),
         transparent: true,
         opacity: 0.08,
       });
@@ -118,7 +136,7 @@ export default function ThreeBackground() {
       for (let i = 0; i < 30; i += 1) {
         const geometry = new THREE.ConeGeometry(0.14 + Math.random() * 0.1, 0.55 + Math.random() * 0.25, 7);
         const material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color().setHSL(0.52 + Math.random() * 0.15, 0.75, 0.56),
+          color: new THREE.Color().setHSL(accentHue() + (Math.random() - 0.5) * 0.06, 0.75, 0.56),
           transparent: true,
           opacity: 0.9,
         });
@@ -131,6 +149,7 @@ export default function ThreeBackground() {
         fish.userData.phase = Math.random() * Math.PI * 2;
         fishGroup.add(fish);
         fishes.push(fish);
+        fishMaterials.push(material);
 
         disposers.push(() => {
           geometry.dispose();
@@ -190,17 +209,22 @@ export default function ThreeBackground() {
       const isDark = document.documentElement.classList.contains("dark");
       if (mode === "nebula") {
         const [material, lineMaterial] = themeAwareMaterials as [THREE.PointsMaterial, THREE.LineBasicMaterial];
+        const hue = accentHue();
         if (material) {
-          material.color.set(isDark ? 0xf472b6 : 0xdb2777);
+          material.color.setHSL(hue, 0.72, isDark ? 0.66 : 0.54);
           material.opacity = isDark ? 0.62 : 0.52;
         }
         if (lineMaterial) {
-          lineMaterial.color.set(isDark ? 0xe2e8f0 : 0x0f172a);
+          lineMaterial.color.setHSL(hue, 0.48, isDark ? 0.78 : 0.26);
           lineMaterial.opacity = isDark ? 0.1 : 0.08;
         }
       }
 
       if (mode === "ocean") {
+        const baseHue = accentHue();
+        fishMaterials.forEach((material, idx) => {
+          material.color.setHSL((baseHue + ((idx % 7) - 3) * 0.01 + 1) % 1, 0.75, isDark ? 0.58 : 0.54);
+        });
         renderer.setClearColor(isDark ? 0x020617 : 0xf8fdff, 0);
       } else {
         renderer.setClearColor(0xffffff, 0);
@@ -225,7 +249,7 @@ export default function ThreeBackground() {
     const themeObserver = new MutationObserver(applyTheme);
     themeObserver.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ["class"],
+      attributeFilter: ["class", "data-accent"],
     });
 
     applyTheme();

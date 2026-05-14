@@ -86,7 +86,7 @@ export default function Sidebar() {
       transition={{ duration: 0.45, ease: "easeOut" }}
       className="bg-white text-slate-900 transition-colors dark:bg-slate-950 dark:text-slate-100 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-112 lg:items-start lg:overflow-y-auto scrollbar-custom xl:w-120"
     >
-      <div className="hidden lg:sticky lg:top-0 lg:flex lg:w-20 lg:flex-none lg:flex-col lg:items-center lg:py-6 lg:px-2 bg-white border-r border-slate-200 h-screen dark:border-slate-800 dark:bg-slate-950">
+      <div className="relative z-40 hidden lg:sticky lg:top-0 lg:flex lg:w-20 lg:flex-none lg:flex-col lg:items-center lg:py-6 lg:px-2 bg-white border-r border-slate-200 h-screen dark:border-slate-800 dark:bg-slate-950">
         <div className="mb-8 flex h-10 w-10 items-center justify-center rounded-lg bg-slate-950 text-sm font-bold text-white dark:bg-white dark:text-slate-950">
           HL
         </div>
@@ -106,7 +106,7 @@ export default function Sidebar() {
                 title={item.label}
               >
                 <Icon size={19} strokeWidth={2.2} />
-                <span className="pointer-events-none absolute left-12 z-20 rounded-md bg-slate-950 px-2 py-1 text-xs font-semibold text-white opacity-0 shadow-sm transition group-hover:opacity-100 dark:bg-white dark:text-slate-950">
+                <span className="pointer-events-none absolute left-12 z-50 rounded-md bg-slate-950 px-2 py-1 text-xs font-semibold text-white opacity-0 shadow-sm transition group-hover:opacity-100 dark:bg-white dark:text-slate-950">
                   {item.label}
                 </span>
               </NavLink>

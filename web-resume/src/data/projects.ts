@@ -18,6 +18,10 @@ export const projectCards: Array<{
   date: string;
   kind: ProjectKind;
 }> = [
+  { key: "valentCalculator", title: "Valent Calculator", date: "2025", kind: "software" },
+  { key: "learningCompanion", title: "Learning Companion Web App", date: "2025", kind: "software" },
+  { key: "lacrosseDashboard", title: "Lacrosse Dashboard", date: "2025", kind: "software" },
+  { key: "fileManagement3d", title: "3D File Management System", date: "2025", kind: "personal" },
   { key: "imageSeg", title: "Image Segmentation", date: "Jan 2025", kind: "software" },
   { key: "workFlow", title: "ETL Workflow", date: "Jan 2025", kind: "software" },
   { key: "aiAgent", title: "Recipe Agent", date: "Sep 2024", kind: "software" },
@@ -25,11 +29,71 @@ export const projectCards: Array<{
   { key: "tyson", title: "Tyson Foods", date: "Apr 2023", kind: "engineering" },
   { key: "unique", title: "Unique Industries", date: "Apr 2022", kind: "engineering" },
   { title: "Nutrition Coaching", date: "Apr 2023", kind: "personal" },
-  { title: "Sport Scoreboard", date: "May 2025", kind: "software" },
-  { title: "Bèo dạt mây trôi", date: "May 2025", kind: "personal" },
+  { key: "beoDatMayTroi", title: "Bèo dạt mây trôi", date: "May 2025", kind: "personal" },
+  { key: "riverFlowsInYou", title: "River Flows in You", date: "May 2025", kind: "personal" },
 ];
 
 export const projectData = {
+  queenBee: {
+    title: "Find Queen Bee (Capstone)",
+    date: "2025",
+    summary: "A real-time queen bee detection system using YOLO, delivered through a Flutter mobile app.",
+    category: "Featured Software Project",
+    description: `Built a real-time queen bee detection system using YOLO.
+Developed the training data pipeline, including image labeling and preprocessing.
+Improved model performance through dataset refinement and model tuning, then deployed the model into a Flutter mobile app for iOS and Android.`,
+    techStack: ["YOLO", "Python", "OpenCV", "Flutter", "iOS", "Android"],
+    screenshots: [],
+  },
+
+  valentCalculator: {
+    title: "Valent Calculator (Chemical Application Tool)",
+    date: "2025",
+    summary: "A cross-platform mobile app for agricultural chemical conversions and dosing calculations.",
+    category: "Work",
+    description: `Developed a cross-platform mobile application for agricultural chemical conversions and dosing calculations.
+Built the app using React Native, Expo, and Zustand, with conversion logic for volume, weight, and concentration.
+Integrated Firebase for product data management and set up CI/CD pipelines using EAS.`,
+    techStack: ["React Native", "Expo", "Zustand", "Firebase", "EAS"],
+    screenshots: [],
+  },
+
+  learningCompanion: {
+    title: "Learning Companion Web App",
+    date: "2025",
+    summary: "A teacher-student platform with AI-enabled workflows and learning pattern analysis.",
+    category: "GVSU Research",
+    description: `Designed and developed a web platform for teachers and students with integrated AI features.
+Built the application using Next.js, Zustand, ShadCN UI, and Supabase.
+Developed features to collect and analyze student interaction data to identify unusual learning patterns in K-12 settings.`,
+    techStack: ["Next.js", "Zustand", "ShadCN UI", "Supabase"],
+    screenshots: [],
+  },
+
+  lacrosseDashboard: {
+    title: "Lacrosse Dashboard (Digital Sign System)",
+    date: "2025",
+    summary: "A real-time game dashboard, packaged as a desktop app with serial communication support.",
+    category: "Work",
+    description: `Built a real-time dashboard using React to display live game statistics and scores.
+Converted the web application into a desktop app using PyWebView based on customer requirements.
+Implemented serial communication between the dashboard and microcontroller to enable real-time data updates.`,
+    techStack: ["React", "PyWebView", "Serial Communication", "Microcontroller Integration"],
+    screenshots: [],
+  },
+
+  fileManagement3d: {
+    title: "3D File Management System (Engineering Lab Tool)",
+    date: "2025",
+    summary: "A desktop workflow manager for 3D printing queues, job states, and metadata tracking.",
+    category: "Personal",
+    description: `Developed a desktop application using Electron with a React-based UI to manage 3D printing workflows across queue, in-progress, and completed stages.
+Implemented drag-and-drop file handling and metadata tracking using SQLite for efficient data management.
+Designed the system to support lab operations and inventory tracking through structured file organization.`,
+    techStack: ["Electron", "React", "SQLite", "Drag-and-Drop UI"],
+    screenshots: [],
+  },
+
   webResume: {
     title: "Web Resume",
     date: "May 2025",
@@ -40,6 +104,7 @@ There are still several features I’d like to try out, so this site will contin
 It’s an ongoing project.`,
     techStack: ["React", "Tailwind CSS", "Vite", "Vercel", "React Router"],
     screenshots: [],
+    demoLink:"https://github.com/clcik-click/Web_Resume",
   },
 
   imageSeg: {
@@ -144,5 +209,27 @@ No chemicals are used, so alternative methods of pest prevention are necessary.
 The variety of plants and herbs are chosen to complement each other, creating a natural environment where each plant supports the health and growth of the others.`,
     techStack: ["Tomatoes", "Peppers", "Melons", "Rosemary", "Basil", "Thyme", "Squash"],
     screenshots: [],
+  },
+
+  beoDatMayTroi: {
+    title: "Bèo dạt mây trôi",
+    date: "May 2025",
+    summary: "A piano performance recording.",
+    category: "Personal",
+    description: "A personal piano performance project.",
+    techStack: ["Piano"],
+    screenshots: [],
+    demoLink: "https://www.youtube.com/watch?v=fUE4OO4I0iI",
+  },
+
+  riverFlowsInYou: {
+    title: "River Flows in You",
+    date: "May 2025",
+    summary: "A piano performance recording.",
+    category: "Personal",
+    description: "A personal piano performance project.",
+    techStack: ["Piano"],
+    screenshots: [],
+    demoLink: "https://www.youtube.com/watch?v=HpNSg68Kybo",
   },
 } satisfies Record<string, Project>;

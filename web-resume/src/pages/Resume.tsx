@@ -73,13 +73,13 @@ function Resume() {
           </p>
           <div data-resume-hero-item className="mt-7 flex flex-wrap gap-3">
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-              <ButtonLink href="pdfs/RESUME_Engineering.pdf" download>
-                Download Engineering Resume
+              <ButtonLink href="pdfs/resume_controls.pdf" target="_blank" rel="noopener noreferrer">
+                View Engineering Resume
               </ButtonLink>
             </motion.div>
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-              <ButtonLink href="pdfs/RESUME_Computer_Science.pdf" download variant="secondary">
-                Download CS Resume
+              <ButtonLink href="pdfs/resume_software.pdf" target="_blank" rel="noopener noreferrer" variant="secondary">
+                View CS Resume
               </ButtonLink>
             </motion.div>
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
@@ -103,6 +103,16 @@ function Resume() {
               date="2025"
               title="Software Developer @ Blue Nucleus"
             >
+            <ul className="list-disc list-inside font-medium text-slate-900 space-y-2 mt-4 dark:text-slate-200">
+              <li className="pl-[1.5em] indent-[-1.5em]">
+                Developed software features and tools to support internal workflows and client-facing applications
+              </li>
+              <li className="pl-[1.5em] indent-[-1.5em]">
+                Collaborated with cross-functional teams to deliver functional solutions aligned with project requirements
+              </li>
+              <li className="pl-[1.5em] indent-[-1.5em]">
+                Improved system eﬃciency and usability through iterative development and testing
+              </li>
 
               <motion.div className="mt-3 flex justify-center" whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
                 <Card
@@ -112,6 +122,7 @@ function Resume() {
                   href="https://www.gvsu.edu/bluenucleus/"
                 />
               </motion.div>
+            </ul>
 
             </TimelineItem>
             </div>
@@ -247,16 +258,13 @@ function Resume() {
           <div className="-my-6" >
             <div data-resume-reveal>
             <TimelineItem
-              label="2024 - Present"
+              label="2024 - 2026"
               date="2024"
               title="Grand Valley State University"
             >
               <ul className="list-disc list-inside font-medium text-slate-900 space-y-2 mt-4 dark:text-slate-200">
                 <li className="pl-[1.5em] indent-[-1.5em]">
                   Master of Science in Applied Computer Science 
-                </li>
-                <li className="pl-[1.5em] indent-[-1.5em]">
-                  Expected Graduation Date: May 2026
                 </li>
                 <li className="pl-[1.5em] indent-[-1.5em]">
                   GPA: 3.9

@@ -1,14 +1,9 @@
 export const credits = [
-  "Song by Christopher Wong",
-  "Photos by Duc Anh, Hoang Anh",
-  "Coming soon from prismic.io",
+  "Song by 로직 좋네여!",
+  "Photos by Hoang Anh",
   "Layout from transmit.tailwindui.com",
-  "Project page from gridbyexample.com",
-  "Timeline from cruip.com",
-  "Home page from preline.co",
   "Stats bar from bizstream.com",
-  "Emoji from emojipedia.org",
-  "Assisted by OpenAI, Google",
+  "Assisted by Codex, Claude, DeepSeek",
 ];
 
 export const stats = [
@@ -49,7 +44,7 @@ export const socialLinks = [
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/hoanlam.hl/",
+    href: "https://www.instagram.com/hoan.lnk/",
     icon: "📷",
   },
 ];

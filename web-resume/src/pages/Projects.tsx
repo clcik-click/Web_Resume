@@ -94,6 +94,20 @@ function Projects() {
           transition={{ duration: 0.22, ease: "easeOut" }}
         >
           <ProjectCard
+            project={projectData.queenBee}
+            kind="software"
+            featured
+            onClick={() => openModal("queenBee")}
+          />
+        </motion.div>
+
+        <motion.div
+          data-project-card
+          whileHover={{ y: -4 }}
+          whileTap={{ scale: 0.995 }}
+          transition={{ duration: 0.22, ease: "easeOut" }}
+        >
+          <ProjectCard
             project={projectData.webResume}
             kind="software"
             featured
@@ -112,20 +126,6 @@ function Projects() {
             kind="engineering"
             featured
             onClick={() => openModal("marJac")}
-          />
-        </motion.div>
-
-        <motion.div
-          data-project-card
-          whileHover={{ y: -4 }}
-          whileTap={{ scale: 0.995 }}
-          transition={{ duration: 0.22, ease: "easeOut" }}
-        >
-          <ProjectCard
-            project={projectData.garden}
-            kind="personal"
-            featured
-            onClick={() => openModal("garden")}
           />
         </motion.div>
 
