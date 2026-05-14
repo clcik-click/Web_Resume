@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
 import PageLayout from '../components/layout/PageLayout';
 import ButtonLink from '../components/ui/ButtonLink';
 import HoverVideo from '../components/media/HoverVideo';
@@ -82,16 +83,22 @@ function Home() {
           I build practical software with an engineering mindset, shaped by industrial automation work and graduate study in applied computer science.
         </p>
         <div data-hero-item className="mt-7 flex flex-wrap gap-3">
-          <ButtonLink href="/resume">View Resume</ButtonLink>
-          <ButtonLink href="/projects" variant="secondary">View Projects</ButtonLink>
-          <ButtonLink href="https://www.linkedin.com/in/hoan-lam-3b72a5179/" target="_blank" rel="noopener noreferrer" variant="secondary">
-            Contact
-          </ButtonLink>
+          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+            <ButtonLink href="/resume">View Resume</ButtonLink>
+          </motion.div>
+          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+            <ButtonLink href="/projects" variant="secondary">View Projects</ButtonLink>
+          </motion.div>
+          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+            <ButtonLink href="https://www.linkedin.com/in/hoan-lam-3b72a5179/" target="_blank" rel="noopener noreferrer" variant="secondary">
+              Contact
+            </ButtonLink>
+          </motion.div>
         </div>
       </section>
 
       <div className="space-y-10 pb-14">
-        <section data-reveal-section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
+        <motion.section whileHover={{ y: -4 }} transition={{ duration: 0.25 }} data-reveal-section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
           <h2 className="text-xl font-semibold text-slate-950 dark:text-white">A Short Introduction</h2>
           <div className="mt-4 space-y-3 text-lg text-slate-800 dark:text-slate-200">
             <p>Hi,</p>
@@ -110,9 +117,9 @@ function Home() {
               Whether you're a computer science recruiter, an engineering recruiter, or just someone curious about who I am, I hope you enjoy getting to know me.
             </p>
           </div>
-        </section>
+        </motion.section>
 
-        <section id="cs" data-reveal-section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
+        <motion.section whileHover={{ y: -4 }} transition={{ duration: 0.25 }} id="cs" data-reveal-section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
           <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Computer Science</h2>
           <div className="mt-4 space-y-3 text-lg text-slate-800 dark:text-slate-200">
             <p>
@@ -123,11 +130,11 @@ function Home() {
             </p>
             <p>
               During my first year as a graduate student, I had the chance to work on several meaningful projects. For example, a project focused on databases:{' '}
-              <a href="https://github.com/clcik-click/CIS660_Project" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">CIS660 Project</a>,{' '}
+              <motion.a whileHover={{ x: 2 }} href="https://github.com/clcik-click/CIS660_Project" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">CIS660 Project</motion.a>,{' '}
               a project involving an AI agent:{' '}
-              <a href="https://github.com/imtiendat0311/AI-Agent" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">AI Agent Project</a>, and{' '}
+              <motion.a whileHover={{ x: 2 }} href="https://github.com/imtiendat0311/AI-Agent" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">AI Agent Project</motion.a>, and{' '}
               a project using visual detection:{' '}
-              <a href="https://github.com/clcik-click/CIS671_Projec" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">CIS671 Project</a>.
+              <motion.a whileHover={{ x: 2 }} href="https://github.com/clcik-click/CIS671_Projec" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">CIS671 Project</motion.a>.
               There were many smaller projects too, but those are a few highlights of the things I took the time to document.
             </p>
             <p>
@@ -138,21 +145,22 @@ function Home() {
               I’m always eager to learn and I really enjoy challenging myself.
             </p>
           </div>
-        </section>
+        </motion.section>
 
-        <section id="eng" data-reveal-section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
+        <motion.section whileHover={{ y: -4 }} transition={{ duration: 0.25 }} id="eng" data-reveal-section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
           <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Engineering</h2>
           <div className="mt-4 space-y-5 text-lg text-slate-800 dark:text-slate-200">
             <p>
               I hold an Electrical Engineering degree from GVSU. My senior capstone is documented here:{' '}
-              <a
+              <motion.a
+                whileHover={{ x: 2 }}
                 href="https://www.gvsu.edu/engineering/2021-engineering-design-conference-gvsu-department-of-chemistry-243.htm"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline dark:text-blue-400"
               >
                 2021 GVSU Engineering Design Conference
-              </a>
+              </motion.a>
               .
             </p>
 
@@ -183,9 +191,9 @@ function Home() {
             </div>
 
           </div>
-        </section>
+        </motion.section>
 
-        <section id="aboutme" data-reveal-section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
+        <motion.section whileHover={{ y: -4 }} transition={{ duration: 0.25 }} id="aboutme" data-reveal-section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
           <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Beyond Work</h2>
           <div className="mt-4 space-y-4 text-lg text-slate-800 dark:text-slate-200">
             <p>
@@ -212,15 +220,15 @@ function Home() {
             <p>
               But the thing I’m most proud of trying, the thing I used to dream about doing when I was in college the first time, is learning to play the piano.
               I started taking lessons, and I’m still learning, but now I can play my{' '}
-              <a href="https://www.youtube.com/watch?v=PTIMTGjWDbg" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">
+              <motion.a whileHover={{ x: 2 }} href="https://www.youtube.com/watch?v=PTIMTGjWDbg" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">
                 favorite song
-              </a>
+              </motion.a>
               , and that makes me really happy.
             </p>
           </div>
-        </section>
+        </motion.section>
 
-        <section data-reveal-section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
+        <motion.section whileHover={{ y: -4 }} transition={{ duration: 0.25 }} data-reveal-section className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
           <h2 className="text-xl font-semibold text-slate-950 dark:text-white">In Closing</h2>
           <div className="mt-4 space-y-3 text-lg text-slate-800 dark:text-slate-200">
             <p>
@@ -237,7 +245,7 @@ function Home() {
               Thanks again for stopping by.
             </p>
           </div>
-        </section>
+        </motion.section>
       </div>
       </div>
     </PageLayout>

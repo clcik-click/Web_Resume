@@ -1,45 +1,122 @@
-import PageHeader from "../components/layout/PageHeader";
+import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import PageLayout from "../components/layout/PageLayout";
+import ButtonLink from "../components/ui/ButtonLink";
 import Card from "../components/ui/Card";
 import TimelineItem from "../components/ui/TimelineItem";
-import { useState } from 'react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function Resume() {
-  const [clicked1, setClicked1] = useState(false);
-  const [clicked2, setClicked2] = useState(false);
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = pageRef.current;
+    if (!root) return;
+
+    const context = gsap.context(() => {
+      gsap.set('[data-resume-hero-item]', { autoAlpha: 0, y: 18 });
+      gsap.to('[data-resume-hero-item]', {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'power3.out',
+      });
+
+      gsap.set('[data-resume-header]', { autoAlpha: 0, y: 16 });
+      gsap.to('[data-resume-header]', {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.65,
+        stagger: 0.1,
+        ease: 'power2.out',
+      });
+
+      const blocks = gsap.utils.toArray<HTMLElement>('[data-resume-reveal]', root);
+      blocks.forEach((block) => {
+        gsap.fromTo(
+          block,
+          { autoAlpha: 0, y: 28 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: block,
+              start: 'top 82%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      });
+    }, root);
+
+    return () => context.revert();
+  }, []);
 
   return (
     <PageLayout className="max-w-3xl">
-      <PageHeader
-        title="Resume"
-        description="A combined software and controls engineering background, with hands-on experience across development, automation, and technical support."
-        eyebrow="Experience"
-      />
+      <div ref={pageRef}>
+        <section className="mb-10 pb-2">
+          <p data-resume-hero-item className="mb-3 text-sm font-semibold uppercase tracking-wide text-pink-600 dark:text-pink-400">
+            Experience
+          </p>
+          <h1 data-resume-hero-item className="text-3xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+            Resume
+          </h1>
+          <p data-resume-hero-item className="mt-3 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg">
+            A combined software and controls engineering background, with hands-on experience across development, automation, and technical support.
+          </p>
+          <div data-resume-hero-item className="mt-7 flex flex-wrap gap-3">
+            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+              <ButtonLink href="pdfs/RESUME_Engineering.pdf" download>
+                Download Engineering Resume
+              </ButtonLink>
+            </motion.div>
+            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+              <ButtonLink href="pdfs/RESUME_Computer_Science.pdf" download variant="secondary">
+                Download CS Resume
+              </ButtonLink>
+            </motion.div>
+            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+              <ButtonLink href="#Work" variant="secondary">
+                Jump to Work
+              </ButtonLink>
+            </motion.div>
+          </div>
+        </section>
 
         <div className="pb-12">
           {/* Section Title */}
-          <h2 className="text-2xl font-bold text-slate-900 my-6 dark:text-white" id="Work" >Work Experience</h2>
-          <hr className="border-t border-slate-300 mb-6 dark:border-slate-800" />
+          <h2 data-resume-header className="text-2xl font-bold text-slate-900 my-6 dark:text-white" id="Work" >Work Experience</h2>
+          <hr data-resume-header className="border-t border-slate-300 mb-6 dark:border-slate-800" />
 
           {/* Timeline Item */}
           <div className="-my-6" >
+            <div data-resume-reveal>
             <TimelineItem
               label="2025 - Present"
               date="2025"
               title="Software Developer @ Blue Nucleus"
             >
 
-            <div className="mt-3 flex justify-center">
-              <Card
-                title="Blue Nucleus"
-                description="Where vision meets execution."
-                imageSrc="RESUME/GVSU.jpg"
-                href="https://www.gvsu.edu/bluenucleus/"
-              />
-            </div>
+              <motion.div className="mt-3 flex justify-center" whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
+                <Card
+                  title="Blue Nucleus"
+                  description="Where vision meets execution."
+                  imageSrc="RESUME/GVSU.jpg"
+                  href="https://www.gvsu.edu/bluenucleus/"
+                />
+              </motion.div>
 
             </TimelineItem>
+            </div>
 
+            <div data-resume-reveal>
             <TimelineItem
               label="2024- 2025"
               date="2024"
@@ -58,7 +135,9 @@ function Resume() {
             </ul>
 
             </TimelineItem>
+            </div>
 
+            <div data-resume-reveal>
             <TimelineItem
               label="2022 - 2024"
               date="2022"
@@ -78,39 +157,49 @@ function Resume() {
                 Led all electrical and programming site activities, including installation, commissioning, testing, and providing stand-by support.
               </li>
 
-              <li className="list-none mt-3 flex justify-center">
-                <Card
-                  title="viastore"
-                  description="Guarantee Success !!"
-                  imageSrc="RESUME/viastore.jpg"
-                  href="https://www.bastiansolutions.com/viastore-north-america/"
-                />
+              <li className="list-none mt-3">
+                <motion.div className="flex justify-center" whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
+                  <Card
+                    title="viastore"
+                    description="Guarantee Success !!"
+                    imageSrc="RESUME/viastore.jpg"
+                    href="https://www.bastiansolutions.com/viastore-north-america/"
+                  />
+                </motion.div>
               </li>
 
             </ul>
             </TimelineItem>
+            </div>
 
+            <div data-resume-reveal>
             <TimelineItem
               label="2021 - 2022"
               date="2021"
               title="L1 Controls Engineer @ Viastore Systems"
             >
             </TimelineItem>
+            </div>
 
+            <div data-resume-reveal>
             <TimelineItem
               label="2019 - 2021"
               date="2019"
               title="Co-op Controls Engineer @ Viastore Systems"
             >
             </TimelineItem>
+            </div>
 
+            <div data-resume-reveal>
             <TimelineItem
               label="2019 - 2021"
               date="2019"
               title="Lab Technician @ Grand Valley State University"
             >
             </TimelineItem>
+            </div>
 
+            <div data-resume-reveal>
             <TimelineItem
               label="2018 - 2019"
               date="2018"
@@ -122,7 +211,9 @@ function Resume() {
                 <li>Prepare food according to recipes</li>
               </ul>
             </TimelineItem>
+            </div>
 
+            <div data-resume-reveal>
             <TimelineItem
               label="2017 - 2018"
               date="2017"
@@ -133,7 +224,9 @@ function Resume() {
                 <li>Interview clients on taxable income and deductible expenses</li>
               </ul>
             </TimelineItem>
+            </div>
 
+            <div data-resume-reveal>
             <TimelineItem
               label="2016 - 2018"
               date="2016"
@@ -144,13 +237,15 @@ function Resume() {
                 <li>Maintained the library and instructed patrons on proper use of equipment</li>
               </ul>
             </TimelineItem>   
+            </div>
           </div>
 
           {/* Section Title */}
-          <h2 className="text-2xl font-bold text-slate-900 my-6 dark:text-white" id="Education">Education</h2>
-          <hr className="border-t border-slate-300 mb-6 dark:border-slate-800" />
+          <h2 data-resume-header className="text-2xl font-bold text-slate-900 my-6 dark:text-white" id="Education">Education</h2>
+          <hr data-resume-header className="border-t border-slate-300 mb-6 dark:border-slate-800" />
 
           <div className="-my-6" >
+            <div data-resume-reveal>
             <TimelineItem
               label="2024 - Present"
               date="2024"
@@ -168,7 +263,9 @@ function Resume() {
                 </li>
               </ul>
             </TimelineItem>
+            </div>
 
+            <div data-resume-reveal>
             <TimelineItem
               label="2018 - 2021"
               date="2018"
@@ -183,7 +280,9 @@ function Resume() {
                 </li>
               </ul>
             </TimelineItem>
+            </div>
 
+            <div data-resume-reveal>
             <TimelineItem
               label="2016 - 2018"
               date="2016"
@@ -204,53 +303,11 @@ function Resume() {
               </li>
             </ul>
             </TimelineItem>
-          </div>
-
-          <div className="sticky bottom-6 inset-x-0 text-center z-50 mt-10">
-            <div className="inline-flex bg-white border border-slate-200 shadow-md rounded-full py-2 px-4 gap-4 dark:border-slate-800 dark:bg-slate-900">
-              <a
-                href="#Work"
-                className="text-sm font-semibold text-slate-700 hover:text-pink-600 active:scale-110 transition-transform cursor-pointer dark:text-slate-300 dark:hover:text-pink-400"
-                title="Work Experience"
-              >
-                Work
-              </a>
-              <a
-                href="#Education"
-                className="text-sm font-semibold text-slate-700 hover:text-pink-600 active:scale-110 transition-transform cursor-pointer dark:text-slate-300 dark:hover:text-pink-400"
-                title="Education"
-              >
-                Education
-              </a>
-              <span className="text-slate-300 dark:text-slate-700">|</span>
-              <a
-                href="pdfs/RESUME_Engineering.pdf"
-                download
-                onClick={() => setClicked1(true)}
-                className={`text-sm font-semibold text-slate-700 hover:text-pink-600 transition-transform cursor-pointer active:scale-110 dark:text-slate-300 dark:hover:text-pink-400 ${
-                  !clicked1 ? 'animate-bounce' : ''
-                }`}
-                title="Download engineering resume"
-              >
-                Engineering PDF
-              </a>
-              <span className="text-slate-300 dark:text-slate-700">|</span>
-              <a
-                href="pdfs/RESUME_Computer_Science.pdf"
-                download
-                onClick={() => setClicked2(true)}
-                className={`text-sm font-semibold text-slate-700 hover:text-pink-600 transition-transform cursor-pointer active:scale-110 dark:text-slate-300 dark:hover:text-pink-400 ${
-                  !clicked2 ? 'animate-bounce' : ''
-                }`}
-                title="Download computer science resume"
-              >
-                CS PDF
-              </a>
-
             </div>
           </div>
 
         </div>
+      </div>
 
     </PageLayout>
   );

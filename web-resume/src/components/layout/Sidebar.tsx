@@ -3,6 +3,7 @@ import { BookOpenText, BriefcaseBusiness, ExternalLink, FlaskConical, FolderKanb
 import type { LucideIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import MusicBar from "../media/MusicBar";
+import BackgroundToggle from "../ui/BackgroundToggle";
 import ThemeToggle from "../ui/ThemeToggle";
 import { credits, socialLinks, stats } from "../../data/profile";
 
@@ -40,6 +41,7 @@ export default function Sidebar() {
         <div className="mb-6 flex flex-col gap-3">
           <ThemeToggle />
           <MusicBar />
+          <BackgroundToggle />
         </div>
 
         <nav className="flex flex-col gap-4 text-sm font-medium mt-2">
