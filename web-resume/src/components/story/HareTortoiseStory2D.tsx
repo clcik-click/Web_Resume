@@ -149,6 +149,9 @@ export default function HareTortoiseStory2D() {
       const panels     = gsap.utils.toArray<HTMLElement>("[data-story-panel]", root);
       const hill1      = root.querySelector("[data-hill-1]") as HTMLElement;
       const hill2      = root.querySelector("[data-hill-2]") as HTMLElement;
+      const farCloud   = root.querySelector("[data-cloud-far]") as HTMLElement;
+      const nearCloud  = root.querySelector("[data-cloud-near]") as HTMLElement;
+      const track      = root.querySelector("[data-track]") as HTMLElement;
 
       /* ── tortoise legs for walk cycle ── */
       const tFL = tortoise.querySelector("[data-leg-fl]") as SVGElement;
@@ -202,6 +205,8 @@ export default function HareTortoiseStory2D() {
       tortoiseWalk
         .to([tFL, tBR], { rotation: 22, transformOrigin: "50% 0%", duration: 0.28, ease: "sine.inOut" }, 0)
         .to([tFR, tBL], { rotation: -22, transformOrigin: "50% 0%", duration: 0.28, ease: "sine.inOut" }, 0)
+        .to(tortoise, { scaleX: 1.03, scaleY: 0.97, duration: 0.14, ease: "sine.out" }, 0)
+        .to(tortoise, { scaleX: 1, scaleY: 1, duration: 0.14, ease: "sine.in" }, 0.14)
         .to([tFL, tBR], { rotation: -22, transformOrigin: "50% 0%", duration: 0.28, ease: "sine.inOut" }, 0.28)
         .to([tFR, tBL], { rotation: 22, transformOrigin: "50% 0%", duration: 0.28, ease: "sine.inOut" }, 0.28);
 
@@ -232,7 +237,7 @@ export default function HareTortoiseStory2D() {
             autoAlpha: i === index ? 1 : 0,
             y: i === index ? 0 : 24,
             filter: i === index ? "blur(0px)" : "blur(4px)",
-            duration: 0.35,
+            duration: 0.45,
             overwrite: true,
           });
         });
@@ -274,6 +279,9 @@ export default function HareTortoiseStory2D() {
         /* Parallax hills */
         .to(hill1, { x: -28, duration: 1.8, ease: "none" }, 0.9)
         .to(hill2, { x: -14, duration: 1.8, ease: "none" }, 0.9)
+        .to(farCloud, { x: -16, duration: 1.8, ease: "none" }, 0.9)
+        .to(nearCloud, { x: -28, duration: 1.8, ease: "none" }, 0.9)
+        .to(track, { x: -10, duration: 1.8, ease: "none" }, 0.9)
 
         /* ─── Beat 2 – Nap ────────────────────────────── t≈2.0 */
         .call(() => { showPanel(2); hareRun.pause(); zzzLoop.play(); }, [], 2.0)
@@ -305,6 +313,17 @@ export default function HareTortoiseStory2D() {
         .to(hare, { rotate: 0, y: 0, duration: 0.3, ease: "back.out(3)" }, 4.5)
         .to(hare, { left: "72%", y: -8, duration: 0.55, ease: "power3.in",
           onStart: () => hareRun.play() }, 4.6);
+
+      /* End pose: side-by-side at the finish (hare left, tortoise right) */
+      tl.to(hare, { left: "74%", y: 0, rotate: 0, duration: 0.35, ease: "power1.out" }, 5.18)
+        .to(tortoise, { left: "82%", y: 0, duration: 0.35, ease: "power1.out" }, 5.18)
+        .to([hare, tortoise], {
+          y: -10,
+          duration: 0.18,
+          ease: "power2.out",
+          yoyo: true,
+          repeat: 1,
+        }, 5.42);
     }, root);
 
     return () => ctx.revert();
@@ -346,8 +365,8 @@ export default function HareTortoiseStory2D() {
         </div>
 
         {/* Clouds */}
-        <div data-cloud className="absolute left-[12%] top-[14%] h-10 w-32 rounded-full bg-white/90 shadow-sm dark:bg-white/15" />
-        <div data-cloud className="absolute right-[22%] top-[20%] h-7 w-24 rounded-full bg-white/75 shadow-sm dark:bg-white/10" />
+        <div data-cloud data-cloud-near className="absolute left-[12%] top-[14%] h-10 w-32 rounded-full bg-white/90 shadow-sm dark:bg-white/15" />
+        <div data-cloud data-cloud-far className="absolute right-[22%] top-[20%] h-7 w-24 rounded-full bg-white/75 shadow-sm dark:bg-white/10" />
         <div data-cloud className="absolute left-[40%] top-[9%] h-6 w-20 rounded-full bg-white/60 dark:bg-white/8" />
 
         {/* Birds */}
@@ -360,7 +379,7 @@ export default function HareTortoiseStory2D() {
         {/* Ground */}
         <div className="absolute bottom-[18%] left-[-8%] h-36 w-[116%] rounded-[50%] bg-emerald-200/80 dark:bg-emerald-900/60" />
         {/* Road / track */}
-        <div className="absolute bottom-[15%] left-[6%] h-3.5 w-[88%] rounded-full bg-amber-200/90 dark:bg-amber-900/80" />
+        <div data-track className="absolute bottom-[15%] left-[6%] h-3.5 w-[88%] rounded-full bg-amber-200/90 dark:bg-amber-900/80" />
         {/* Road dashes */}
         {Array.from({ length: 8 }).map((_, i) => (
           <div
@@ -369,13 +388,24 @@ export default function HareTortoiseStory2D() {
             style={{ left: `${10 + i * 10}%` }}
           />
         ))}
-        {/* Finish post */}
-        <div className="absolute bottom-[15%] left-[76%] h-48 w-2.5 bg-slate-800 dark:bg-slate-200" />
-        <div className="absolute bottom-[47%] left-[76%] h-10 w-20 rounded-r-full bg-pink-500 dark:bg-pink-400 shadow-md" />
-        {/* Tree trunk + canopy */}
-        <div className="absolute bottom-[23%] left-[52%] h-28 w-5 rounded-t-full bg-amber-800 dark:bg-amber-900" />
-        <div className="absolute bottom-[34%] left-[48%] h-28 w-32 rounded-[50%] bg-emerald-400 dark:bg-emerald-700" />
-        <div className="absolute bottom-[38%] left-[50%] h-20 w-24 rounded-[50%] bg-emerald-300/70 dark:bg-emerald-600/60" />
+        {/* Race finish line (black/white checkered + pole + flag) */}
+        <div className="absolute bottom-[15%] left-[79%] z-20 h-3.5 w-[12%] overflow-hidden rounded-sm border border-slate-300/70 dark:border-slate-600/70">
+          <div className="grid h-full w-full grid-cols-10">
+            {Array.from({ length: 40 }).map((_, i) => (
+              <div
+                key={i}
+                className={`${Math.floor(i / 10) % 2 === i % 2 ? "bg-white" : "bg-slate-900 dark:bg-slate-200"}`}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="absolute bottom-[15%] left-[79%] z-20 h-30 w-2 rounded-t-sm bg-slate-800 dark:bg-slate-200" />
+        <div className="absolute bottom-[21.5%] left-[79.5%] z-20 h-8 w-16 rounded-r-sm bg-pink-500 shadow-md dark:bg-pink-400" />
+
+        {/* Tree trunk + canopy (attached) */}
+        <div className="absolute bottom-[23%] left-[54%] h-30 w-5 rounded-t-full bg-amber-800 dark:bg-amber-900" />
+        <div className="absolute bottom-[30.5%] left-[49%] h-28 w-34 rounded-[50%] bg-emerald-400 dark:bg-emerald-700" />
+        <div className="absolute bottom-[34%] left-[51%] h-20 w-26 rounded-[50%] bg-emerald-300/70 dark:bg-emerald-600/60" />
         {/* Small bushes */}
         <div className="absolute bottom-[19%] left-[30%] h-8 w-14 rounded-[50%] bg-emerald-300 dark:bg-emerald-700" />
         <div className="absolute bottom-[19%] right-[18%] h-6 w-10 rounded-[50%] bg-emerald-300 dark:bg-emerald-700" />
