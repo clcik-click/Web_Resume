@@ -11,7 +11,7 @@ const Story = lazy(() => import("./pages/Story"));
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Sidebar />
 
         <Routes>
