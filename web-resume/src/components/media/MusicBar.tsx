@@ -1,97 +1,53 @@
-import { useRef, useState, useEffect } from 'react';
+import { Pause, Play } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export default function MusicBar() {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.2);
-
-  const formatTime = (s: number) =>
-    `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
+    audio.volume = 0.22;
 
-    audio.volume = volume;
+    const syncState = () => setIsPlaying(!audio.paused);
+    const onEnded = () => setIsPlaying(false);
 
-    const updateTime = () => {
-      setCurrentTime(audio.currentTime);
-      setProgress((audio.currentTime / audio.duration) * 100);
-    };
-
-    const setMeta = () => setDuration(audio.duration);
-
-    audio.addEventListener('timeupdate', updateTime);
-    audio.addEventListener('loadedmetadata', setMeta);
+    audio.addEventListener("play", syncState);
+    audio.addEventListener("pause", syncState);
+    audio.addEventListener("ended", onEnded);
 
     return () => {
-      audio.removeEventListener('timeupdate', updateTime);
-      audio.removeEventListener('loadedmetadata', setMeta);
+      audio.removeEventListener("play", syncState);
+      audio.removeEventListener("pause", syncState);
+      audio.removeEventListener("ended", onEnded);
     };
-  }, [volume]);
-
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
-    audio.currentTime = percent * duration;
-  };
+  }, []);
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play();
+    if (audio.paused) {
+      void audio.play();
+      return;
     }
-    setIsPlaying(!isPlaying);
+
+    audio.pause();
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto mt-8 px-4">
-      <audio ref={audioRef} src="musics/bg_music.mp3" hidden loop/>
-
-      <div className="flex items-center gap-2 bg-white p-3 rounded shadow dark:bg-slate-900 dark:border dark:border-slate-800">
-        {/* Play/Pause */}
-        <button
-          onClick={togglePlayPause}
-          className="text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300"
-        >
-          {isPlaying ? '⏸️' : '▶️'}
-        </button>
-
-        {/* Time */}
-        <span className="text-sm text-slate-600 w-12 text-right dark:text-slate-300">{formatTime(currentTime)}</span>
-
-        {/* Progress Bar */}
-        <div className="relative w-full h-2 bg-slate-300 rounded cursor-pointer dark:bg-slate-700" onClick={handleSeek}>
-          <div className="h-full bg-pink-500 rounded" style={{ width: `${progress}%` }} />
-        </div>
-
-        <span className="text-sm text-slate-600 w-12 dark:text-slate-300">{formatTime(duration)}</span>
-
-        {/* Volume */}
-        <input
-          type="range"
-          min={0}
-          max={1}
-          step={0.01}
-          value={volume}
-          onChange={(e) => {
-            setVolume(parseFloat(e.target.value));
-            if (audioRef.current) {
-              audioRef.current.volume = parseFloat(e.target.value);
-            }
-          }}
-          className="w-10"
-        />
-      </div>
-    </div>
+    <>
+      <audio ref={audioRef} src="musics/bg_music.mp3" hidden loop />
+      <button
+        type="button"
+        onClick={togglePlayPause}
+        className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-white"
+        aria-label={isPlaying ? "Pause music" : "Play music"}
+        title={isPlaying ? "Pause music" : "Play music"}
+      >
+        {isPlaying ? <Pause size={17} /> : <Play size={17} />}
+      </button>
+    </>
   );
 }

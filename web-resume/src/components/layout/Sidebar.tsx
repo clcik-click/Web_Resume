@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { BookOpenText, BriefcaseBusiness, ExternalLink, FlaskConical, FolderKanban, Home, Minus, Plus } from "lucide-react";
+import { BookOpenText, BriefcaseBusiness, ExternalLink, FlaskConical, FolderKanban, Home } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import MusicBar from "../media/MusicBar";
@@ -23,12 +22,9 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   }`;
 
 export default function Sidebar() {
-  const [showAllCredits, setShowAllCredits] = useState(false);
-
   const focusStats = stats.filter((stat) =>
     ["Curiosity Level", "Team Player Energy", "Debugging Mojo"].includes(stat.name)
   );
-  const visibleCredits = showAllCredits ? credits : credits.slice(0, 4);
 
   return (
     <motion.header
@@ -40,6 +36,10 @@ export default function Sidebar() {
       <div className="hidden lg:sticky lg:top-0 lg:flex lg:w-20 lg:flex-none lg:flex-col lg:items-center lg:py-6 lg:px-2 bg-white border-r border-slate-200 h-screen dark:border-slate-800 dark:bg-slate-950">
         <div className="mb-8 flex h-10 w-10 items-center justify-center rounded-lg bg-slate-950 text-sm font-bold text-white dark:bg-white dark:text-slate-950">
           HL
+        </div>
+        <div className="mb-6 flex flex-col gap-3">
+          <ThemeToggle />
+          <MusicBar />
         </div>
 
         <nav className="flex flex-col gap-4 text-sm font-medium mt-2">
@@ -61,24 +61,19 @@ export default function Sidebar() {
       </div>
 
       <div className="relative z-10 mx-auto px-4 pt-8 pb-6 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:border-r lg:border-slate-200 lg:px-8 lg:py-10 dark:lg:border-slate-800 xl:px-10">
-        <div className="mb-4 flex justify-end">
-          <ThemeToggle />
-        </div>
-
         <motion.section
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.4 }}
           className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/70"
         >
-          <div className="flex items-center gap-4">
+          <div className="space-y-4">
             <img
               src="/TAB/Avatar.jpeg"
               alt="Hoan Lam"
-              className="h-20 w-20 rounded-lg object-cover"
+              className="h-64 w-full rounded-lg object-cover object-top"
             />
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-pink-600 dark:text-pink-400">Portfolio</p>
+            <div className="px-1">
               <h1 className="mt-1 text-2xl font-bold text-slate-950 dark:text-white">Hoan Lam</h1>
               <p className="mt-1 text-sm leading-5 text-slate-600 dark:text-slate-300">
                 Software developer with controls engineering experience.
@@ -122,9 +117,6 @@ export default function Sidebar() {
             ))}
           </div>
         </motion.section>
-
-        <MusicBar />
-
         <motion.section
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -160,27 +152,18 @@ export default function Sidebar() {
         >
           <div className="flex items-center justify-between border-b border-slate-200 pb-2 dark:border-slate-800">
             <h2 className="text-sm font-bold uppercase tracking-wide text-slate-900 dark:text-slate-100">Credits</h2>
-            <button
-              type="button"
-              onClick={() => setShowAllCredits((current) => !current)}
-              className="inline-flex items-center gap-1 text-xs font-semibold text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300"
-            >
-              {showAllCredits ? <Minus size={13} /> : <Plus size={13} />}
-              {showAllCredits ? "Less" : "More"}
-            </button>
           </div>
           <motion.ul
             layout
             role="list"
             className="mt-3 space-y-1.5 text-sm leading-6 text-slate-600 dark:text-slate-300"
           >
-            {visibleCredits.map((credit) => (
+            {credits.map((credit) => (
               <motion.li
                 key={credit}
                 layout
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="truncate"
                 title={credit}
               >
                 {credit}
